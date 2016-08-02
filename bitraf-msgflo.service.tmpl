@@ -3,6 +3,7 @@ WorkingDirectory=@PROJECTDIR@
 ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.fbp --broker mqtt://@BROKER@
 Restart=always
 User=www-data
+Environment="PATH=@PROJECTDIR@/node_modules/.bin"
 
 [Unit]
 After=network-online.target
