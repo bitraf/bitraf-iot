@@ -1,9 +1,8 @@
 [Service]
-WorkingDirectory=@DESTDIR@
-ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --broker @BROKER@ --graph graphs/doorsystem.fbp
+WorkingDirectory=@PROJECTDIR@
+ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.fbp --broker mqtt://@BROKER@
 Restart=always
 User=www-data
-Environment="BROKER=@BROKER@"
 
 [Unit]
 After=network-online.target
