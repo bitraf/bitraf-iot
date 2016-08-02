@@ -5,10 +5,6 @@
 
 * Put the TV files into this repository
 
-## Live Flowhub network
-
-* Deploy MsgFlo coordinator to Bomba
-
 ## Dynamic reconfiguration
 
 * (Msgflo) Show data running coming through connection
@@ -19,7 +15,8 @@
 
 ## Stateful webinterface for door
 
-* Make the MQTT interface include outputs `isopen` and `error`
+* (msgflo-cpp) Add support for MQTT
+* Make the MQTT interface include outputs `isopen` and `error`, using msgflo-cpp
 * Enable WebSocket in Mosquitto for webui
 * Update webinterface to show `isopen` status
 
@@ -34,3 +31,5 @@
 * Time/RTC broadcast
 * TV: Show image
 * TV: Show URL
+* Room activity sensors using PIR
+* Machine activity sensors. Using current sensing?
