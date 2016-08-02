@@ -1,0 +1,14 @@
+component: door-web/WebUi
+label: Fires an event when button is pressed
+icon: lightbulb-o
+inports: {}
+outports:
+  opendownstairs:
+    queue: /bitraf/door/boxy4/open
+    type: number
+  openoffice:
+    queue: /bitraf/door/boxy2/open
+    type: number
+  memberlogin:
+    queue: /bitraf/doorweb/memberlogin
+    type: string

@@ -1,0 +1,37 @@
+{
+  "name": "dlock13",
+  "version": "0.0.1",
+  "description": "Door access system for hackerspaces, used at bitraf.no",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "MQTT",
+    "MsgFlo"
+  ],
+  "author": "Jon Nordby <jononor@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "msgflo": "^0.7.4"
+  },
+  "dependencies": {
+    "fbp": "^1.5.0",
+    "mqtt": "1.4.x"
+  },
+  "msgflo": {
+    "variables": {
+      "FOREIGN": "node ./node_modules/.bin/msgflo-register-foreign --role #ROLE participants/#COMPONENT.yml",
+      "COFFEE": "./node_modules/.bin/msgflo-nodejs participants/#COMPONENT.coffee --name #ROLE",
+      "NOFLO": "node ./node_modules/.bin/noflo-runtime-msgflo --name #ROLE --graph #COMPONENT --iips #IIPS"
+    },
+    "components": {
+      "dlock13/DoorOpener": "#FOREIGN",
+      "dlock13/DoorLock": "#FOREIGN",
+      "tv/ShowMessage": "#FOREIGN",
+      "door-web/WebUi": "#FOREIGN",
+      "DoorAdapter": "#COFFEE",
+      "WelcomeMessage": "#COFFEE"
+    }
+  }
+}

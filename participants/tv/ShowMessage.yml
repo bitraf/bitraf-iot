@@ -1,0 +1,8 @@
+component: tv/ShowMessage
+label: Show some text on TV
+icon: lightbulb-o
+inports:
+  text:
+    queue: /bitraf/tv/showmessage
+    type: string
+outports: {}
