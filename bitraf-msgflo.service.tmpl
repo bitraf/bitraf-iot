@@ -1,0 +1,12 @@
+[Service]
+WorkingDirectory=@DESTDIR@
+ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --broker @BROKER@ --graph graphs/doorsystem.fbp
+Restart=always
+User=www-data
+Environment="BROKER=@BROKER@"
+
+[Unit]
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
