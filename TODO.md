@@ -20,10 +20,18 @@
 * Enable WebSocket in Mosquitto for webui
 * Update webinterface to show `isopen` status
 
-## Physical status display
+## Kickoff workshop
+
+Documentation
+
+* Add sensor/actuator using ESP8266+Diller
+* Add sensor/actuator using RPi/BB + msgflo-cpp
+* How to wire together things using MsgFlo
+
+## Physical status display for door
 
 * Create a device that can show lights
-* Wire it up to be
+* Wire it up to show the door `isopen` state
 
 ## Wanted MQTT services
 
@@ -33,3 +41,5 @@
 * TV: Show URL
 * Room activity sensors using PIR
 * Machine activity sensors. Using current sensing?
+* Temperature+moisture, indoors and outdoors
+* Wind sensor outdoors
