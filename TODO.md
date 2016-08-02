@@ -1,10 +1,13 @@
 
 # TODO
 
+## General setup
+
+* Put the TV files into this repository
+
 ## Live Flowhub network
 
 * Deploy MsgFlo coordinator to Bomba
-* Create a short URL for Flowhub IDE
 
 ## Dynamic reconfiguration
 
