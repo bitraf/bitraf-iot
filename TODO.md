@@ -3,8 +3,9 @@
 
 ## General setup
 
-* Put the TV files into this repository
-* Fix permissions on the TV topics
+* {elias} Put the TV files into this repository
+* broker: Fix permissions on the TV topics
+* coordinator: Lock down permissions. Dedicated user, use systemd sandboxing features
 
 ## Dynamic reconfiguration
 
@@ -13,10 +14,11 @@
 * (Flowhub+Msgflo) Network persist supports
 * (Msgflo) Support adding new participant in code
 * (Flowhub) Respect changes coming from runtime side
+* (Msgflo) Support [read-only access](https://github.com/msgflo/msgflo/issues/37)
 
 ## Stateful webinterface for door
 
-* (msgflo-cpp) Add support for MQTT
+* (msgflo-cpp) Add support for MQTT {trygvis}
 * Make the MQTT interface include outputs `isopen` and `error`, using msgflo-cpp
 * Enable WebSocket in Mosquitto for webui
 * Update webinterface to show `isopen` status
@@ -41,6 +43,8 @@ Documentation
 * Time/RTC broadcast
 * TV: Show image
 * TV: Show URL
+* TV: Speak using text-to-speech
+* TV: Trigger common sounds
 * Room activity sensors using PIR
 * Machine activity sensors. Using current sensing?
 * Temperature+moisture, indoors and outdoors
