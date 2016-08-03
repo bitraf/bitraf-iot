@@ -2,11 +2,18 @@
 WorkingDirectory=@PROJECTDIR@
 ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.fbp --broker mqtt://@BROKER@
 Restart=always
-User=www-data
+User=msgflo
 Environment="PATH=@PROJECTDIR@/node_modules/.bin"
+DevicePolicy=closed
+PrivateDevices=true
+ProtectSystem=full
+PrivateTmp=true
+CapabilityBoundingSet=.
+
 
 [Unit]
 After=network-online.target
+Documentation=http://iot.bitraf.no
 
 [Install]
 WantedBy=multi-user.target
