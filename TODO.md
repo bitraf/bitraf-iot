@@ -4,6 +4,7 @@
 ## General setup
 
 * Put the TV files into this repository
+* Fix permissions on the TV topics
 
 ## Dynamic reconfiguration
 
@@ -24,6 +25,7 @@
 
 Documentation
 
+* Generate HTML API docs with topic info from participant data
 * Add sensor/actuator using ESP8266+Diller
 * Add sensor/actuator using RPi/BB + msgflo-cpp
 * How to wire together things using MsgFlo
