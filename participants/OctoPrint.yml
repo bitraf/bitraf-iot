@@ -1,0 +1,11 @@
+component: OctoPrint/events
+label: Sends events from OctoPrint
+icon: lightbulb-o
+inports: {}
+outports:
+  PrintStarted:
+    queue: /public/3d-print/kossel-mini/event/PrintStarted
+    type: string
+  PrintDone:
+    queue: /public/3d-print/kossel-mini/event/PrintEnded
+    type: string
