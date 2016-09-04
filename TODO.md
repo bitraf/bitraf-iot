@@ -18,10 +18,22 @@
 
 ## Stateful webinterface for door
 
-* (msgflo-cpp) Add support for MQTT {trygvis}
 * Make the MQTT interface include outputs `isopen` and `error`, using msgflo-cpp
 * Enable WebSocket in Mosquitto for webui
 * Update webinterface to show `isopen` status
+
+## Radio
+
+* Deploy a bridge from MQTT to MPD, for controlling music over network
+
+## Power turnoff
+
+To ensure that dangerous equipment is off when people leave the lab,
+we would like to have a single button (by the door) to turn their power off.
+
+* Install standard 433Mhz power control for 230v on lab-benches, 3d-printers
+* Deploy a two-way bridge `MQTT<->433MHz` bridge
+* Create a controller with buttons for on/off
 
 ## Kickoff workshop
 
