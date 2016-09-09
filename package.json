@@ -1,5 +1,5 @@
 {
-  "name": "dlock13",
+  "name": "bitraf-iot",
   "version": "0.0.1",
   "description": "Door access system for hackerspaces, used at bitraf.no",
   "main": "index.js",
