@@ -1,4 +1,4 @@
-component: OctoPrint/events
+component: OctoPrint
 label: Sends events from OctoPrint
 icon: lightbulb-o
 inports: {}

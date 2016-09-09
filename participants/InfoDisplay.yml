@@ -1,4 +1,4 @@
-component: tv/ShowMessage
+component: InfoDisplay
 label: Show some text on TV
 icon: lightbulb-o
 inports:
