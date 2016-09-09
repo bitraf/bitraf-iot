@@ -3,8 +3,6 @@
 
 ## General setup
 
-* {elias} Put the TV files into this repository
-* broker: Fix permissions on the TV topics
 * coordinator: Lock down permissions. Dedicated user, use systemd sandboxing features
 
 ## Dynamic reconfiguration
