@@ -8,8 +8,6 @@
 ## Dynamic reconfiguration
 
 * (Msgflo) Show data running coming through connection
-* (Msgflo) Remove connections when removing edge
-* (Flowhub+Msgflo) Network persist supports
 * (Flowhub) Make component examples be for MsgFlo
 * (Flowhub) Respect changes coming from runtime side
 * (Msgflo) Support [read-only access](https://github.com/msgflo/msgflo/issues/37)
