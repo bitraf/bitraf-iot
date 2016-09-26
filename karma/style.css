@@ -1,0 +1,11 @@
+.colorize {
+      background: rgba(50,60,70,0.3);
+}
+
+#drawgrid{
+       background: rgba(200,50,50,0.3);
+}
+
+.GtkDrawingArea{
+       background: rgba(50,60,70,0.3);
+}

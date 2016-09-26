@@ -7,5 +7,5 @@ outports:
     queue: /public/3d-print/kossel-mini/event/PrintStarted
     type: string
   PrintDone:
-    queue: /public/3d-print/kossel-mini/event/PrintEnded
+    queue: /public/3d-print/kossel-mini/event/PrintDone
     type: string

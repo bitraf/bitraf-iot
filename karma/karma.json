@@ -1,0 +1,20 @@
+{
+    "karmas": [
+    {
+        "text": "General karma",
+        "image": "karma_0.png",
+        "color": "0x33AABBCC"
+	},{
+        "text": "Clean kitchen",
+        "image": "karma_1.png",
+        "color": "0x33AABBCC"
+	}, {
+        "text": "Empty dishwasher",
+        "image": "karma_2.png",
+        "color": "0x33AABBCC"
+    }, {
+        "text": "Fill dishwasher",
+        "image": "karma_3.png",
+        "color": "0x33AABBCC"
+    }]
+}
