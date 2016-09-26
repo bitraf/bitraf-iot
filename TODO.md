@@ -3,8 +3,6 @@
 
 ## General setup
 
-* {elias} Put the TV files into this repository
-* broker: Fix permissions on the TV topics
 * coordinator: Lock down permissions. Dedicated user, use systemd sandboxing features
 
 ## Dynamic reconfiguration
@@ -12,16 +10,28 @@
 * (Msgflo) Show data running coming through connection
 * (Msgflo) Remove connections when removing edge
 * (Flowhub+Msgflo) Network persist supports
-* (Msgflo) Support adding new participant in code
+* (Flowhub) Make component examples be for MsgFlo
 * (Flowhub) Respect changes coming from runtime side
 * (Msgflo) Support [read-only access](https://github.com/msgflo/msgflo/issues/37)
 
 ## Stateful webinterface for door
 
-* (msgflo-cpp) Add support for MQTT {trygvis}
 * Make the MQTT interface include outputs `isopen` and `error`, using msgflo-cpp
 * Enable WebSocket in Mosquitto for webui
 * Update webinterface to show `isopen` status
+
+## Radio
+
+* Deploy a bridge from MQTT to MPD, for controlling music over network
+
+## Power turnoff
+
+To ensure that dangerous equipment is off when people leave the lab,
+we would like to have a single button (by the door) to turn their power off.
+
+* Install standard 433Mhz power control for 230v on lab-benches, 3d-printers
+* Deploy a two-way bridge `MQTT<->433MHz` bridge
+* Create a controller with buttons for on/off
 
 ## Kickoff workshop
 

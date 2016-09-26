@@ -1,4 +1,4 @@
-component: door-web/WebUi
+component: WebUi
 label: Fires an event when button is pressed
 icon: lightbulb-o
 inports: {}

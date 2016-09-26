@@ -26,4 +26,7 @@ install-coordinator: bitraf-msgflo.service
 
 install: install-scripts
 
+runtime:
+	PATH=${PATH}:./node_modules/.bin msgflo --graph graphs/testing.fbp
+
 .PHONY: bitraf-door-subscriber.service

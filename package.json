@@ -1,5 +1,5 @@
 {
-  "name": "dlock13",
+  "name": "bitraf-iot",
   "version": "0.0.1",
   "description": "Door access system for hackerspaces, used at bitraf.no",
   "main": "index.js",
@@ -16,7 +16,7 @@
     "coffee-script": "^1.10.0",
     "fbp": "1.5.x",
     "mqtt": "1.4.x",
-    "msgflo": "^0.7.5",
+    "msgflo": "^0.8.2",
     "msgflo-nodejs": "^0.5.2"
   },
   "msgflo": {
