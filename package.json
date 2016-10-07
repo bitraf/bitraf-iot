@@ -4,7 +4,7 @@
   "description": "Door access system for hackerspaces, used at bitraf.no",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter spec --compilers .coffee:coffee-script/register ./test/*.coffee"
   },
   "keywords": [
     "MQTT",
@@ -19,6 +19,10 @@
     "msgflo": "^0.8.2",
     "msgflo-nodejs": "^0.6.0"
   },
-  "msgflo": {
+  "msgflo": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "debug": "^2.2.0",
+    "mocha": "^3.1.0"
   }
 }
