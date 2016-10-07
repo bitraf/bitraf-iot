@@ -17,7 +17,7 @@
     "fbp": "1.5.x",
     "mqtt": "1.4.x",
     "msgflo": "^0.8.2",
-    "msgflo-nodejs": "^0.5.2"
+    "msgflo-nodejs": "^0.6.0"
   },
   "msgflo": {
   }
