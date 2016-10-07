@@ -1,14 +1,11 @@
 
 # TODO
 
-## General setup
-
-* coordinator: Lock down permissions. Dedicated user, use systemd sandboxing features
+Fix https://github.com/bitraf/bitraf-iot/issues/1
 
 ## Dynamic reconfiguration
 
 * (Msgflo) Show data running coming through connection
-* (Flowhub) Make component examples be for MsgFlo
 * (Flowhub) Respect changes coming from runtime side
 * (Msgflo) Support [read-only access](https://github.com/msgflo/msgflo/issues/37)
 
