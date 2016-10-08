@@ -1,9 +1,0 @@
-[Unit]
-Description=Webpage displaying MQTT messages
-After=network-online.target
-
-[Service]
-ExecStart=/home/pi/bitraf-iot/msg-server/tv.py    
-
-[Install]
-WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Service speaking incomming messages
+After=network-online.target
+
+[Service]
+ExecStart=/home/pi/bitraf-iot/msg-server/speak.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+

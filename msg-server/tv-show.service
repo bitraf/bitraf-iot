@@ -1,0 +1,11 @@
+[Unit]
+Description=Display messages using toilet
+After=network-online.target
+
+[Service]
+ExecStart=/home/pi/bitraf-iot/msg-server/message.sh    
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
