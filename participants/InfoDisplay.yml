@@ -1,8 +1,11 @@
 component: InfoDisplay
 label: Show some text on TV
-icon: lightbulb-o
+icon: tv
 inports:
   text:
     queue: /bitraf/tv/showmessage
+    type: string
+  speak:
+    queue: /bitraf/tv/speakmessage
     type: string
 outports: {}
