@@ -1,8 +1,0 @@
-# These have their queues hardcoded together
-# No need to set up their connections, just declare that they exist
-boxy2(DoorLock)
-boxy4(DoorLock)
-webui(WebUi)
-
-tv(InfoDisplay)
-welcome(WelcomeMessage)

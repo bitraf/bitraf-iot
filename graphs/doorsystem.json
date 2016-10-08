@@ -1,0 +1,21 @@
+{
+  "processes": {
+    "boxy2": {
+      "component": "DoorLock"
+    },
+    "boxy4": {
+      "component": "DoorLock"
+    },
+    "webui": {
+      "component": "WebUi"
+    },
+    "tv": {
+      "component": "InfoDisplay"
+    },
+    "welcome": {
+      "component": "WelcomeMessage"
+    }
+  },
+  "connections": [],
+  "caseSensitive": false
+}
