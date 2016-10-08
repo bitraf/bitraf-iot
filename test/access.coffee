@@ -11,6 +11,10 @@ cases = [
 
   { topic: '/bitraf/door/boxy2/open', action: 'write', auth: 'none', permitted: false }
   { topic: '/bitraf/door/boxy4/open', action: 'write', auth: 'none', permitted: false }
+
+  # everyone should be able to use other topics
+  { topic: '/public/fofofo', action: 'write', auth: 'none', permitted: true }
+  { topic: 'role.PORT', action: 'write', auth: 'none', permitted: true } # msgflo default convention
 ]
 
 # The authentication to use in tests
