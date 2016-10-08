@@ -10,3 +10,9 @@ with a broker running on `mqtt.bitraf.no` (default port, 1883).
 [Open live view of the network using Flowhub](http://iot.bitraf.no/live)
 
 # [TODO](./TODO.md)
+
+
+## Running [tests](./test)
+
+    npm install # once
+    npm test

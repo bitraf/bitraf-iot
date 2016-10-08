@@ -1,8 +1,6 @@
 
 # TODO
 
-Fix https://github.com/bitraf/bitraf-iot/issues/1
-
 ## Dynamic reconfiguration
 
 * (Msgflo) Show data running coming through connection
