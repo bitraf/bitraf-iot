@@ -1,8 +1,8 @@
 [Service]
 WorkingDirectory=@PROJECTDIR@
-ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.json --auto-save --broker mqtt://@BROKER@
+ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.json --auto-save=true --broker mqtt://@BROKER@
 Restart=always
-User=www-data
+User=msgflo
 Environment=PATH=@PROJECTDIR@/node_modules/.bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin DEBUG=msgflo*
 
 [Unit]
