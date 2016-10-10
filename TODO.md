@@ -15,7 +15,8 @@
 
 ## Radio
 
-* Deploy a bridge from MQTT to MPD, for controlling music over network
+* Deploy a bridge from `MQTT <-> MPD`, for controlling music over network.
+Minimally useful: Next/previous, now-playing
 
 ## Power turnoff
 
@@ -35,10 +36,14 @@ Documentation
 * Add sensor/actuator using RPi/BB + msgflo-cpp
 * How to wire together things using MsgFlo
 
-## Physical status display for door
+## Physical dooropener/status
 
-* Create a device that can show lights
-* Wire it up to show the door `isopen` state
+* Create device(s) with button and LED. Send message when pressed, light up when receiving.
+* Have a participant which reads pressed state from, and sends message to open the doors.
+Should also have a 'guestarriving' port, and send on that. Analogous to 'memberlogin'.
+* Setup security policy in Mosquitto. The buttons should have their own credentials,
+forward participant same as doorsys.
+* Wire button LED to show the door `isopen` state
 
 ## Wanted MQTT services
 
