@@ -9,9 +9,15 @@
 
 ## Stateful webinterface for door
 
-* Make the MQTT interface include outputs `isopen` and `error`, using msgflo-cpp
+* Deploy new [dlock13-msgflo](https://github.com/bitraf/dlock13/tree/master/dlock13-msgflo).
 * Enable WebSocket in Mosquitto for webui
-* Update webinterface to show `isopen` status
+* Update webinterface to show `isopen` status from MQTT
+
+## Physical dooropener/status
+
+* Have a participant which reads pressed state from, and sends message to open the doors.
+Should also have a 'guestarriving' port, and send on that. Analogous to 'memberlogin'.
+* Wire button LED to show the door `isopen` state
 
 ## Radio
 
@@ -35,15 +41,6 @@ Documentation
 * Add sensor/actuator using ESP8266+Diller
 * Add sensor/actuator using RPi/BB + msgflo-cpp
 * How to wire together things using MsgFlo
-
-## Physical dooropener/status
-
-* Create device(s) with button and LED. Send message when pressed, light up when receiving.
-* Have a participant which reads pressed state from, and sends message to open the doors.
-Should also have a 'guestarriving' port, and send on that. Analogous to 'memberlogin'.
-* Setup security policy in Mosquitto. The buttons should have their own credentials,
-forward participant same as doorsys.
-* Wire button LED to show the door `isopen` state
 
 ## Wanted MQTT services
 
