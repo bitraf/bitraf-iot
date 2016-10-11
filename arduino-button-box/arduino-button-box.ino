@@ -1,5 +1,16 @@
 #include "msgflo.h"
 #include "utils.h"
+#include "config.h"
+
+#if not defined(BOX_ID) || \
+    not defined(WIFI_SSID) || \
+    not defined(WIFI_PASSWORD) || \
+    not defined(MQTT_HOST) || \
+    not defined(MQTT_PORT) || \
+    not defined(MQTT_USERNAME) || \
+    not defined(MQTT_PASSWORD)
+#error Missing required config parameter. See config.h
+#endif
 
 #include <Arduino.h>
 #include <ArduinoOTA.h>
@@ -39,18 +50,18 @@ void setupOta() {
 }
 
 struct Config {
-  const String id = "";
+  const String id = BOX_ID;
 
   const int ledPin = 5;
 
-  const String wifiSsid = ;
-  const String wifiPassword = ;
+  const String wifiSsid = WIFI_SSID;
+  const String wifiPassword = WIFI_PASSWORD;
 
-  const char *mqttHost = "mqtt.bitraf.no";
-  const int mqttPort = 1883;
+  const char *mqttHost = MQTT_HOST;
+  const int mqttPort = MQTT_PORT;
 
-  const char *mqttUsername = ;
-  const char *mqttPassword = ;
+  const char *mqttUsername = MQTT_USERNAME;
+  const char *mqttPassword = MQTT_PASSWORD;
 } cfg;
 
 WiFiClient wifiClient;
