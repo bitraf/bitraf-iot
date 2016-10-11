@@ -39,7 +39,7 @@ void setupOta() {
 }
 
 struct Config {
-  const String id = "door-2";
+  const String id = "";
 
   const int ledPin = 5;
 
@@ -48,6 +48,9 @@ struct Config {
 
   const char *mqttHost = "mqtt.bitraf.no";
   const int mqttPort = 1883;
+
+  const char *mqttUsername = ;
+  const char *mqttPassword = ;
 } cfg;
 
 WiFiClient wifiClient;
@@ -79,7 +82,7 @@ void setup() {
              "bitraf-iot/BlinkButton",
              "Blinking Button",
              "lightbulb-o",
-             &mqttClient, clientId.c_str());
+             &mqttClient, clientId.c_str(), cfg.mqttUsername, cfg.mqttPassword);
 
   buttonPort = engine->addOutPort("button-event", "any", "bitraf/button/" + cfg.id + "/event");
 
@@ -121,6 +124,7 @@ void loop() {
 
   if (button.changed()) {
     Serial.printf("button changed: ts=%u %d\r\n", millis(), button.state());
+    buttonPort->send("!");
   }
 
   bool b = digitalRead(button.pin);

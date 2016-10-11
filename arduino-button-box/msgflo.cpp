@@ -85,6 +85,8 @@ class PubSubClientEngine : public Engine, public Publisher {
 
     PubSubClient *mqtt;
     const char *clientId;
+    const char *username;
+    const char *password;
 
     std::vector<PubSubOutPort> outPorts;
   public:
@@ -92,9 +94,10 @@ class PubSubClientEngine : public Engine, public Publisher {
       mqtt->publish(queue.c_str(), payload.c_str());
     }
 
-    PubSubClientEngine(
-      const String &component, const String &label, const String &icon,
-      PubSubClient *mqtt, const char *clientId): component(component), label(label), icon(icon), mqtt(mqtt), clientId(clientId) {
+    PubSubClientEngine(const String &component, const String &label, const String &icon,
+                       PubSubClient *mqtt, const char *clientId, const char *username, const char *password):
+      component(component), label(label), icon(icon), mqtt(mqtt), clientId(clientId),
+      username(username), password(password) {
       mqtt->setCallback(&globalCallback);
     }
 
@@ -107,7 +110,7 @@ class PubSubClientEngine : public Engine, public Publisher {
     }
 
     void onConnected() {
-    // fbp {"protocol":"discovery","command":"participant","payload":{"component":"dlock13/DoorLock","label":"Open the door","icon":"lightbulb-o","inports":[{"queue":"/bitraf/door/boxy4/open","type":"object","id":"open"}],"outports":[],"role":"boxy4","id":"boxy4"}}
+      // fbp {"protocol":"discovery","command":"participant","payload":{"component":"dlock13/DoorLock","label":"Open the door","icon":"lightbulb-o","inports":[{"queue":"/bitraf/door/boxy4/open","type":"object","id":"open"}],"outports":[],"role":"boxy4","id":"boxy4"}}
       String discoveryMessage =
         "{"
         "\"protocol\": \"discovery\","
@@ -136,7 +139,7 @@ class PubSubClientEngine : public Engine, public Publisher {
 
         Serial.print("Connecting...");
         // This is blocking
-        if (mqtt->connect(clientId)) {
+        if (mqtt->connect(clientId, username, password)) {
           Serial.println("ok");
           onConnected();
         } else {
@@ -158,13 +161,13 @@ Engine *createPubSubClientEngine(
   const String &component,
   const String &label,
   const String &icon,
-  PubSubClient* mqtt, const char *clientId) {
+  PubSubClient* mqtt, const char *clientId, const char *username, const char *password) {
   if (instance != nullptr) {
     Serial.println("Double initialization of msgflo engine.");
     return instance;
   }
 
-  instance = new (instanceBytes) PubSubClientEngine(component, label, icon, mqtt, clientId);
+  instance = new (instanceBytes) PubSubClientEngine(component, label, icon, mqtt, clientId, username, password);
   return instance;
 }
 
