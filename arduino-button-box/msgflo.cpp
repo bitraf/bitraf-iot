@@ -48,15 +48,15 @@ class Publisher {
     virtual void send(const String &queue, const String &payload) = 0;
 };
 
-struct PubSubOutPort : public OutPort {
-  public:
+class PubSubOutPort : public OutPort {
     const String id;
     const String type;
-    const String queue;
+    const String _queue;
     Publisher *publisher;
 
+  public:
     PubSubOutPort(const String &id, const String &type, const String &queue, Publisher *publisher) :
-      id(id), type(type), queue(queue), publisher(publisher) {
+      id(id), type(type), _queue(queue), publisher(publisher) {
     }
 
     void toJson(String &s) const {
@@ -65,18 +65,23 @@ struct PubSubOutPort : public OutPort {
       s += "\", \"type\": \"";
       s += type;
       s += "\", \"queue\": \"";
-      s += queue;
+      s += _queue;
       s += "\"}";
     }
 
     void send(const String &payload) {
-      publisher->send(queue, payload);
+      publisher->send(_queue, payload);
+    }
+
+    const String queue() const {
+      return "yo"; // _queue;
     }
 };
 
 static
 const char *discoveryTopic = "fbp";
 
+template<unsigned int out_port_count>
 class PubSubClientEngine : public Engine, public Publisher {
 
     const String component;
@@ -88,22 +93,36 @@ class PubSubClientEngine : public Engine, public Publisher {
     const char *username;
     const char *password;
 
-    std::vector<PubSubOutPort> outPorts;
+    // std::vector<PubSubOutPort> outPorts;
+    uint8_t outPorts[sizeof(PubSubOutPort) * out_port_count];
+    unsigned int outPortCount;
   public:
     void send(const String &queue, const String &payload) {
+      // Serial.print("publishing to ");
+      // Serial.print(queue);
+      // Serial.print(": ");
+      // Serial.println(payload);
       mqtt->publish(queue.c_str(), payload.c_str());
     }
 
     PubSubClientEngine(const String &component, const String &label, const String &icon,
                        PubSubClient *mqtt, const char *clientId, const char *username, const char *password):
       component(component), label(label), icon(icon), mqtt(mqtt), clientId(clientId),
-      username(username), password(password) {
+      username(username), password(password), outPortCount(0) {
       mqtt->setCallback(&globalCallback);
     }
 
     OutPort* addOutPort(const String &id, const String &type, const String &queue) {
-      outPorts.emplace_back(id, type, queue, this);
-      return &outPorts[outPorts.size() - 1];
+      // outPorts.emplace_back(id, type, queue, this);
+      // auto ptr = &outPorts[outPorts.size() - 1];
+
+      auto addr = &outPorts[sizeof(PubSubOutPort) * outPortCount];
+      outPortCount++;
+      auto ptr = new (addr) PubSubOutPort(id, type, queue, this);
+
+      Serial.print("new port: ");
+      Serial.println((uint32_t)ptr, HEX);
+      return ptr;
     }
 
     void callback(const char* topic, byte* payload, unsigned int length) {
@@ -122,9 +141,13 @@ class PubSubClientEngine : public Engine, public Publisher {
       discoveryMessage += "\", \"icon\": \"";
       discoveryMessage += icon;
       discoveryMessage += "\", \"outports\": [";
-      for (auto &p : outPorts) {
+      for (unsigned int i = 0; i < outPortCount; i++) {
+        auto p = reinterpret_cast<PubSubOutPort *>(outPorts)[i];
         p.toJson(discoveryMessage);
       }
+      // for (auto &p : outPorts) {
+      //   p.toJson(discoveryMessage);
+      // }
       discoveryMessage += "]}}";
       Serial.println("discoveryMessage");
       Serial.println(discoveryMessage);
@@ -150,8 +173,9 @@ class PubSubClientEngine : public Engine, public Publisher {
     }
 };
 
-uint8_t instanceBytes[sizeof(PubSubClientEngine)];
-static PubSubClientEngine *instance = nullptr;
+using E = PubSubClientEngine<3>;
+uint8_t instanceBytes[sizeof(E)];
+static E *instance = nullptr;
 
 static void globalCallback(const char* topic, byte* payload, unsigned int length) {
   instance->callback(topic, payload, length);
@@ -167,7 +191,7 @@ Engine *createPubSubClientEngine(
     return instance;
   }
 
-  instance = new (instanceBytes) PubSubClientEngine(component, label, icon, mqtt, clientId, username, password);
+  instance = new (instanceBytes) E(component, label, icon, mqtt, clientId, username, password);
   return instance;
 }
 

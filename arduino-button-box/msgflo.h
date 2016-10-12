@@ -5,8 +5,12 @@
 namespace msgflo {
 
 class OutPort {
+//  protected:
+//    virtual ~OutPort() {};
   public:
     virtual void send(const String &payload) = 0;
+
+    virtual const String queue() const = 0;
 };
 
 class Engine {
