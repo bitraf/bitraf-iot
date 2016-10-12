@@ -12,7 +12,7 @@ class Repeat(msgflo.Participant):
       'component': 'GuestLogin',
       'label': 'Trigger door opening from using button',
       'inports': [
-        { 'id': 'in', 'type': 'bang', 'queue': '/bitraf/button/1/event' },
+        { 'id': 'in', 'type': 'bang', 'queue': 'bitraf/button/1' },
       ],
       'outports': [
         { 'id': 'openfront', 'type': 'int', 'queue': '/bitraf/door/frontdoor/open' },
@@ -22,12 +22,13 @@ class Repeat(msgflo.Participant):
     msgflo.Participant.__init__(self, d, role)
 
   def process(self, inport, msg):
-    print 'received', inport, msg
+    print 'received', inport, msg.data
 
     frontdoor_time = 10 # seconds
     innerdoor_time = 60 # seconds
 
     self.send('openfront', frontdoor_time)
     self.send('opendownstairs', innerdoor_time)
+    print 'tried to open doors'
 
     self.ack(msg)
