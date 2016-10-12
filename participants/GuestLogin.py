@@ -17,7 +17,7 @@ class Repeat(msgflo.Participant):
       'outports': [
         { 'id': 'openfront', 'type': 'int', 'queue': '/bitraf/door/frontdoor/open' },
         { 'id': 'opendownstairs', 'type': 'int', 'queue': '/bitraf/door/2floor/open' },
-        { 'id': 'guestarriving', 'type': 'bang', 'queue': '/bitraf/guestlogin/arriving' },
+        { 'id': 'guestarriving', 'type': 'bang', 'queue': 'bitraf/guestlogin/arriving' },
       ],
     }
     msgflo.Participant.__init__(self, d, role)
