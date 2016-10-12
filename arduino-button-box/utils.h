@@ -66,3 +66,50 @@ class PinPoller {
     }
 };
 
+template<typename value_t, unsigned int size>
+class averager {
+  private:
+    value_t values[size];
+    unsigned int count;
+
+  public:
+    averager() {
+      reset();
+    }
+
+    void operator+=(value_t value) {
+      if (count == size) {
+        return;
+      }
+
+      values[count++] = value;
+    }
+
+    bool full() {
+      return count == size;
+    }
+
+    void reset() {
+      for (unsigned int i = 0; i < size; i++) {
+        values[i] = value_t(0);
+      }
+      count = 0;
+    }
+
+    value_t taste() {
+      value_t sum = 0;
+
+      for (unsigned int i = 0; i < size; i++) {
+        sum += values[i];
+      }
+
+      return sum / count;
+    }
+
+    value_t read() {
+      value_t avg = taste();
+      reset();
+      return avg;
+    }
+};
+
