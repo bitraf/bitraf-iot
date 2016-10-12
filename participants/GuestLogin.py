@@ -17,6 +17,7 @@ class Repeat(msgflo.Participant):
       'outports': [
         { 'id': 'openfront', 'type': 'int', 'queue': '/bitraf/door/frontdoor/open' },
         { 'id': 'opendownstairs', 'type': 'int', 'queue': '/bitraf/door/2floor/open' },
+        { 'id': 'guestarriving', 'type': 'bang', 'queue': '/bitraf/guestlogin/arriving' },
       ],
     }
     msgflo.Participant.__init__(self, d, role)
@@ -29,6 +30,7 @@ class Repeat(msgflo.Participant):
 
     self.send('openfront', frontdoor_time)
     self.send('opendownstairs', innerdoor_time)
+    self.send('guestarriving', '!')
     print 'tried to open doors'
 
     self.ack(msg)
