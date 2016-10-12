@@ -1,0 +1,13 @@
+[Service]
+ExecStart=/usr/bin/python2 /var/www/.local/bin/msgflo-python /home/webapps/bitraf-iot/participants/GuestLogin.py guestlogin
+WorkingDirectory=/
+Restart=always
+User=www-data
+# Expects MSGFLO_BROKER to be set, including user:password.
+# Using for instance /etc/systemd/system/bitraf-guestlogin.d/10-connection.conf
+
+[Unit]
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
