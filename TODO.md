@@ -9,7 +9,6 @@
 
 ## Stateful webinterface for door
 
-* Deploy new [dlock13-msgflo](https://github.com/bitraf/dlock13/tree/master/dlock13-msgflo).
 * Enable WebSocket in Mosquitto for webui
 * Update webinterface to show `isopen` status from MQTT
 
