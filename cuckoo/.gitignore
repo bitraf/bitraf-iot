@@ -1,0 +1,8 @@
+/debian/bitraf-cuckoo.debhelper.log
+/debian/bitraf-cuckoo.postinst.debhelper
+/debian/bitraf-cuckoo.postrm.debhelper
+/debian/bitraf-cuckoo.prerm.debhelper
+/debian/bitraf-cuckoo.substvars
+/debian/bitraf-cuckoo/
+/debian/debhelper-build-stamp
+/debian/files

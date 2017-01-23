@@ -1,0 +1,23 @@
+Source: bitraf-cuckoo
+Section: python
+Priority: optional
+Maintainer: Martin Stensgård, <mastensg@mastensg.net>
+Build-Depends: debhelper (>= 9),
+               python (>= 2.6.6-3~),
+               dh-python,
+               dh-systemd
+Standards-Version: 3.9.2
+X-Python-Version: >= 2.6
+
+
+Package: bitraf-cuckoo
+Architecture: all
+Section: python
+Depends: ${misc:Depends}, ${python:Depends}
+Description: MQTT integration for the cuckoo clock on the second floor
+ Uses the following topics:
+ /public/cuckoo/button/pressed
+ /public/cuckoo/button/released
+ /public/cuckoo/button/state
+ /public/cuckoo/chirp
+ /public/cuckoo/lamp

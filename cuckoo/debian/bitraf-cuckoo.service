@@ -1,0 +1,12 @@
+[Service]
+ExecStart=/usr/bin/bitraf-cuckoo
+KillMode=process
+Restart=always
+User=pi
+
+[Unit]
+Description=MQTT interface for cuckoo clock
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
