@@ -27,7 +27,7 @@ def on_message(client, userdata, msg):
         GPIO.setup(23, GPIO.IN)
     elif msg.topic == "/public/cuckoo/lamp":
         if msg.payload == "off":
-            GPIO.output(27, 1)
+            GPIO.output(27, 0)
         elif msg.payload == "on":
             GPIO.output(27, 1)
 

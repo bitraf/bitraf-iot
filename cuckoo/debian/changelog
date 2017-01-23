@@ -1,3 +1,9 @@
+bitraf-cuckoo (3) unstable; urgency=medium
+
+  * Bug fix: Turn lamp off on "off" message.
+
+ -- Masten SG <mastensg@karma>  Mon, 23 Jan 2017 00:34:51 +0000
+
 bitraf-cuckoo (2) unstable; urgency=medium
 
   * Add some topics.
