@@ -6,6 +6,17 @@
 namespace trygvis {
 namespace arduino {
 
+static
+const char *nullptr_if_empty(const String& s) {
+  for (size_t i = 0; i < s.length(); i++) {
+    if (s[i] != ' ') {
+      return s.c_str();
+    }
+  }
+
+  return nullptr;
+}
+
 template<int timeout_ms>
 class fixed_timer {
     long timeout;
@@ -172,15 +183,18 @@ void assertEquals(const A a, const B b) {
 }
 
 static
+__attribute__((used))
 void assertTrue(bool x) {
   if (!x) {
-    Serial.printf("%s failed\n");
+    Serial.printf("failed\n");
   }
 }
+
 static
+__attribute__((used))
 void assertFalse(bool x) {
   if (x) {
-    Serial.printf("%s failed\n");
+    Serial.printf("failed\n");
   }
 }
 

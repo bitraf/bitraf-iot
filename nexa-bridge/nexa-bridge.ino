@@ -1,5 +1,6 @@
 #include "Tx433_Nexa.h"
 #include "trygvis_arduino.h"
+#include "bitraf_iot.h"
 
 #include <WiFiManager.h> // Version 0.12.0
 #include <PubSubClient.h>
@@ -9,23 +10,23 @@ using namespace trygvis::arduino;
 
 String ch_nexa = "1010";
 
-const int NEXA_PIN = D0;
+// Configuration parameters. These are written to the config file
+static String mqtt_host = "mqtt.bitraf.no";
+static int mqtt_port = 1883;
+static String mqtt_username;
+static String mqtt_password;
+static String mqtt_topic_prefix = "bitraf";
+static String instance_name;
+static int radio_rx_pin = D0;
+static int radio_tx_pin = D3;
+static int config_pin = D3;
+int config_magic;
+
+bool save_config = false;
 
 WiFiManager wifiManager;
 WiFiClient wifi_client;
 PubSubClient mqtt;
-
-const String mqtt_client_id = "bitraf-" + WiFi.macAddress();
-String mqtt_host = "mqtt.bitraf.no";
-String mqtt_username;
-String mqtt_password;
-int mqtt_port = 1883;
-String instance_id;
-int config_ok = 0;
-
-bool save_config = false;
-
-static const int CONFIG_PIN = D3;
 
 void load_config() {
   with_spiffs spiffs;
@@ -60,10 +61,20 @@ void load_config() {
   mqtt_password = f.readStringUntil('\n');
   Serial.println(mqtt_password);
 
-  instance_id = f.readStringUntil('\n');
-  Serial.println(instance_id);
+  mqtt_topic_prefix = f.readStringUntil('\n');
+  Serial.println(mqtt_topic_prefix);
 
-  config_ok = f.readStringUntil('\n').toInt();
+  instance_name = f.readStringUntil('\n');
+  Serial.println(instance_name);
+
+  radio_rx_pin = f.readStringUntil('\n').toInt();
+  Serial.println(radio_tx_pin);
+
+  radio_tx_pin = f.readStringUntil('\n').toInt();
+  Serial.println(radio_rx_pin);
+
+  config_magic = f.readStringUntil('\n').toInt();
+  Serial.println(config_magic);
   f.close();
 }
 
@@ -89,7 +100,13 @@ void write_config() {
   f.print('\n');
   f.print(mqtt_password);
   f.print('\n');
-  f.print(instance_id);
+  f.print(mqtt_topic_prefix);
+  f.print('\n');
+  f.print(instance_name);
+  f.print('\n');
+  f.print(radio_rx_pin);
+  f.print('\n');
+  f.print(radio_tx_pin);
   f.print('\n');
   f.print(1337);
   f.print('\n');
@@ -113,24 +130,27 @@ void setup()
 {
   Serial.begin(115200);
   while (!Serial);
-  Serial.println("\n\nMQTT Nexa Bridge");
+  Serial.println("\n\nBitraf IOT");
 
   mqtt.setCallback(mqttCallback);
 
-  Serial.printf("MQTT Client id: %s\n", mqtt_client_id.c_str());
-
-  pinMode(CONFIG_PIN, INPUT);
+  pinMode(config_pin, INPUT);
 
   load_config();
 
-  if (config_ok != 1337) {
+  if (instance_name.length() == 0) {
+    instance_name = bitraf_iot::generate_instance_name();
+  }
+
+  mqtt.setClient(wifi_client);
+
+  if (config_magic != 1337) {
     run_wifi_manager();
   } else {
     WiFiManager wifiManager;
     wifiManager.autoConnect();
   }
 
-  mqtt.setClient(wifi_client);
 }
 
 void save_config_callback()
@@ -140,6 +160,8 @@ void save_config_callback()
 
 void run_wifi_manager()
 {
+  String configuration_ssid = "bitraf-iot-" + instance_name;
+
   WiFiManager wifiManager;
   wifiManager.setSaveConfigCallback(save_config_callback);
 
@@ -152,10 +174,19 @@ void run_wifi_manager()
   WiFiManagerParameter custom_mqtt_password("mqtt_password", "MQTT Password", mqtt_password.c_str(), 40);
   wifiManager.addParameter(&custom_mqtt_password);
 
-  WiFiManagerParameter custom_instance_id("instance_id", "Instance (1...)", "", 40);
-  wifiManager.addParameter(&custom_instance_id);
+  WiFiManagerParameter custom_mqtt_topic_prefix("mqtt_topic_prefix", "MQTT Topic Prefix", mqtt_topic_prefix.c_str(), 40);
+  wifiManager.addParameter(&custom_mqtt_topic_prefix);
 
-  if (!wifiManager.startConfigPortal(mqtt_client_id.c_str())) {
+  WiFiManagerParameter custom_radio_rx_pin("radio_rx_pin", "Radio RX pin", String(radio_rx_pin).c_str(), 3);
+  wifiManager.addParameter(&custom_radio_rx_pin);
+
+  WiFiManagerParameter custom_instance_name("instance_name", "Instance name", instance_name.c_str(), 40);
+  wifiManager.addParameter(&custom_instance_name);
+
+  WiFiManagerParameter custom_radio_tx_pin("radio_tx_pin", "Radio TX pin", String(radio_tx_pin).c_str(), 3);
+  wifiManager.addParameter(&custom_radio_tx_pin);
+
+  if (!wifiManager.startConfigPortal(configuration_ssid.c_str())) {
     delay(3000);
     //reset and try again, or maybe put it to deep sleep
     ESP.reset();
@@ -166,8 +197,9 @@ void run_wifi_manager()
     mqtt_host = custom_mqtt_host.getValue();
     mqtt_username = custom_mqtt_username.getValue();
     mqtt_password = custom_mqtt_password.getValue();
-    instance_id = String(custom_instance_id.getValue()).toInt();
-    config_ok = 1337;
+    mqtt_topic_prefix = custom_mqtt_topic_prefix.getValue();
+    instance_name = custom_instance_name.getValue();
+    config_magic = 1337;
     write_config();
   }
 }
@@ -176,7 +208,7 @@ void mqttCallback(const char* t, byte* payload, unsigned int length)
 {
   String topic(t);
   String body;
-  for (int i = 0; i < length; i++) {
+  for (unsigned int i = 0; i < length; i++) {
     body += static_cast<char>(payload[i]);
   }
 
@@ -199,7 +231,7 @@ void mqttCallback(const char* t, byte* payload, unsigned int length)
   if (part1 == "cmd") {
     String id;
     id.reserve(52);
-    for (int i = 0; i < part2.length(); i++) {
+    for (unsigned int i = 0; i < part2.length(); i++) {
       char c = part2[i];
       if (c == '0') {
         id += '0';
@@ -220,7 +252,7 @@ void mqttCallback(const char* t, byte* payload, unsigned int length)
 
     Serial.printf("ID: %s\n", id.c_str());
 
-    Tx433_Nexa nexa(NEXA_PIN, id, ch_nexa);
+    Tx433_Nexa nexa(radio_tx_pin, id, ch_nexa);
     if (body == "off") {
       Serial.printf("Sending OFF to: %s\n", id.c_str());
       nexa.Device_Off(0);
@@ -236,36 +268,50 @@ void mqttCallback(const char* t, byte* payload, unsigned int length)
   }
 }
 
+static void mqtt_loop() {
+  if (config_magic != 1337) {
+    return;
+  }
+
+  static fixed_interval_timer<1000> connect_timer;
+
+  if (mqtt.connected()) {
+    mqtt.loop();
+    connect_timer.reset();
+  }
+
+  if (connect_timer.expired()) {
+    const char *u = nullptr_if_empty(mqtt_username);
+    const char *p = nullptr_if_empty(mqtt_password);
+    const char *client_id = instance_name.c_str();
+    Serial.printf("Connecting to %s:%d, %s/%s, client-id=%s\n", mqtt_host.c_str(), mqtt_port,
+                  u ? u : "not set", p ? p : "not set",
+                  client_id ? client_id : "not set");
+    mqtt.setClient(wifi_client);
+    mqtt.disconnect();
+    mqtt.setServer(mqtt_host.c_str(), mqtt_port);
+    String prefix = mqtt_topic_prefix + "/nexa/" + instance_name;
+    String online_topic = prefix + "/online";
+    if (mqtt.connect(client_id, u, p,
+                     online_topic.c_str(), 0, 1, "0")) {
+      Serial.printf("Connected to MQTT server, prefix=%s\n", prefix.c_str());
+      mqtt.publish(online_topic.c_str(), "1", true);
+      mqtt.subscribe((prefix + "/cmd/#").c_str());
+    } else {
+      Serial.printf("Connect failed: %d\n", mqtt.state());
+      Serial.printf("Local IP: %s\n", WiFi.localIP().toString().c_str());
+    }
+  }
+}
+
 void loop()
 {
-  if (digitalRead(CONFIG_PIN) == 0) {
+  if (digitalRead(config_pin) == 0) {
     Serial.println("Reconfiguration requested");
     run_wifi_manager();
   }
 
-  if (config_ok == 1337) {
-    if (mqtt.connected()) {
-      mqtt.loop();
-    } else {
-      Serial.printf("Connecting to %s:%d, %s/%s, client-id=%s\n", mqtt_host.c_str(), mqtt_port,
-                    mqtt_username.c_str(), mqtt_password.c_str(),
-                    mqtt_client_id.c_str());
-      mqtt.setClient(wifi_client);
-      mqtt.disconnect();
-      mqtt.setServer(mqtt_host.c_str(), mqtt_port);
-      String prefix = "bitraf/nexa/" + instance_id;
-      String willTopic = prefix + "/online";
-      if (mqtt.connect(mqtt_client_id.c_str(), mqtt_username.c_str(), mqtt_password.c_str(),
-                       willTopic.c_str(), 0, 1, "0")) {
-        Serial.printf("Connected to MQTT server, prefix=%s\n", prefix.c_str());
-        mqtt.subscribe((prefix + "/cmd/#").c_str());
-        mqtt.publish(willTopic.c_str(), "1");
-      } else {
-        Serial.printf("Connect failed: %d\n", mqtt.state());
-        Serial.printf("Local IP: %s\n", WiFi.localIP().toString().c_str());
-      }
-    }
-  }
+  mqtt_loop();
 
   String line;
   static line_reader line_reader;
