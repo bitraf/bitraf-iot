@@ -4,7 +4,8 @@
   "description": "Door access system for hackerspaces, used at bitraf.no",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec --compilers .coffee:coffee-script/register ./test/*.coffee"
+    "test": "mocha --reporter spec --compilers .coffee:coffee-script/register ./test/*.coffee",
+    "start": "msgflo --graph graphs/doorsystem.json"
   },
   "keywords": [
     "MQTT",
@@ -19,7 +20,12 @@
     "msgflo": "^0.10.19",
     "msgflo-nodejs": "^0.10.5"
   },
-  "msgflo": {},
+  "msgflo": {
+    "namespace": "",
+    "components": {
+       "DoorLock": "dlock13 #ROLE #ROLE.gpio"
+    }
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "debug": "^2.2.0",
