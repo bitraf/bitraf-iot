@@ -3,9 +3,8 @@
 
 ## Dynamic reconfiguration
 
-* (Msgflo) Show data running coming through connection
+* (Flowhub/Msgflo) Support [read-only access](https://github.com/msgflo/msgflo/issues/37)
 * (Flowhub) Respect changes coming from runtime side
-* (Msgflo) Support [read-only access](https://github.com/msgflo/msgflo/issues/37)
 
 ## Stateful webinterface for door
 
