@@ -3,11 +3,14 @@ label: Fires an event when button is pressed
 icon: lightbulb-o
 inports: {}
 outports:
-  opendownstairs:
-    queue: /bitraf/door/boxy4/open
+  openfrontdoor:
+    queue: /bitraf/door/frontdoor/open
+    type: number
+  openlab:
+    queue: /bitraf/door/2floor/open
     type: number
   openoffice:
-    queue: /bitraf/door/boxy2/open
+    queue: /bitraf/door/4floor/open
     type: number
   memberlogin:
     queue: /bitraf/doorweb/memberlogin
