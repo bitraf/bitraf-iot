@@ -1,7 +1,8 @@
 [Service]
 WorkingDirectory=@PROJECTDIR@
-ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.json --auto-save=true --ignore 2floor --ignore 4floor --ignore frontdoor --broker mqtt://@BROKER@
+ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.json --ignore 2floor --ignore 4floor --ignore frontdoor --broker mqtt://@BROKER@
 Restart=always
+RestartSec=3
 User=msgflo
 Environment=PATH=@PROJECTDIR@/node_modules/.bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin DEBUG=msgflo*
 
