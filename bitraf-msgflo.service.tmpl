@@ -1,7 +1,7 @@
 [Service]
 WorkingDirectory=@PROJECTDIR@
 ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.json --wait-timeout 300 --ignore 2floor --ignore 4floor --ignore 
-frontdoor --broker mqtt://@BROKER@
+frontdoor --ping-interval 60 --broker mqtt://@BROKER@
 Restart=always
 RestartSec=3
 User=msgflo
