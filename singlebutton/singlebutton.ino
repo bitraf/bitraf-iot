@@ -83,7 +83,7 @@ void loop() {
 
   // TODO: check for statechange. If changed, send right away. Else only send every 3 seconds or so
   if (millis() > nextButtonCheck) {
-    const bool pressed = digitalRead(cfg.buttonPin);
+    const bool pressed = !digitalRead(cfg.buttonPin);
     buttonPort->send(pressed ? "true" : "false");
     nextButtonCheck += 100;
   }
