@@ -6,3 +6,4 @@ node_modules/
 /*.build
 /*.changes
 config.h
+*.pyc
