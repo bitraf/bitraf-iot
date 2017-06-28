@@ -3,24 +3,40 @@
 
 ## Dynamic reconfiguration
 
+* Fix Msgflo runtime not running
 * (Flowhub/Msgflo) Support [read-only access](https://github.com/msgflo/msgflo/issues/37)
 * (Flowhub) Respect changes coming from runtime side
 
-## Stateful webinterface for door
+## Split door control in webinterface
 
-* Enable WebSocket in Mosquitto for webui
-* Update webinterface to show `isopen` status from MQTT
+* Update the sender script to take `DOOR` and maybe `DURATION` arguments
+* Update door-web UI to have multiple buttons, and pass the DOOR argument
+
+## Error handling in door webinterface
+
+* Fix overeager post-condition
+* Webinterface should assert that door did in fact open successfully.
+Could maybe use the Python wrapper code?
 
 ## Physical dooropener/status
 
-* Have a participant which reads pressed state from, and sends message to open the doors.
-Should also have a 'guestarriving' port, and send on that. Analogous to 'memberlogin'.
-* Wire button LED to show the door `isopen` state
+* Deploy adapter participants on server
+* Reduce the spam from the guestbutton, currently always sending every 100ms 
+* Detect when doorbell rings and send on MQTT.
+Either on `BUS` input to phone, or on the telefone speaker output.
+* Make the doorbell ringing blink the guest login LED
 
 ## Radio
 
 * Deploy a bridge from `MQTT <-> MPD`, for controlling music over network.
 Minimally useful: Next/previous, now-playing
+
+## Window closing
+
+* Hall effect sensor
+[ah372](http://no.farnell.com/diodes-inc/ah372-p-b/hall-effect-switch-30g-0-025a/dp/2709523), wide
+* 3d-print a) holder for sensors, b) holder for magnet
+* Magnets [Kjell 10pk](https://www.kjell.com/no/produkter/hjem-kontor-fritid/gadgets/magneter-10-pk--p50070)
 
 ## Power turnoff
 
