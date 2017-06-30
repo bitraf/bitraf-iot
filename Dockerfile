@@ -5,8 +5,6 @@ EXPOSE 3569
 
 # Reduce npm install verbosity, overflows Travis CI log view
 ENV NPM_CONFIG_LOGLEVEL warn
-# Configure Bitraf MQTT
-ENV MSGFLO_BROKER mqtt://mqtt.bitraf.no
 
 RUN mkdir -p /var/bitraf-iot
 WORKDIR /var/bitraf-iot
