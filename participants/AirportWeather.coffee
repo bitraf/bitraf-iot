@@ -23,6 +23,10 @@ Participant = (client, role) ->
       type: 'string'
       hidden: false
     ,
+      id: 'fetch'
+      type: 'bang'
+      hidden: false
+    ,
       id: 'temperature'
       type: 'float'
       hidden: true
@@ -48,9 +52,13 @@ Participant = (client, role) ->
     if inport in ['temperature', 'pressure']
       # Forward to outport
       return callback inport, null, indata
-    unless inport is 'icao'
+    unless inport in ['icao', 'fetch']
       return callback 'error', new Error "Unknown port name"
-    getWeather indata, (err, weather) ->
+    if inport is 'icao'
+      station = indata
+    if inport is 'fetch' and station is null
+      return callback 'error', new Error "No weather station provided"
+    getWeather station, (err, weather) ->
       return callback 'error', err if err
       participant.send 'pressure', weather.altimeterInHpa
       callback 'temperature', null, weather.temperature
