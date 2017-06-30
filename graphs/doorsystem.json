@@ -20,6 +20,36 @@
                 "label": "4floor"
             }
         },
+        "templaboffice": {
+            "component": "TemperatureSensor1",
+            "metadata": {
+                "x": 252,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "Lab office"
+            }
+        },
+        "temp4floor": {
+            "component": "TemperatureSensor2",
+            "metadata": {
+                "x": 252,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "4th floor"
+            }
+        },
+        "tempoutside4th": {
+            "component": "TemperatureSensor3",
+            "metadata": {
+                "x": 252,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "Outside (4th floor)"
+            }
+        },
         "frontdoor": {
             "component": "DoorLock",
             "metadata": {
