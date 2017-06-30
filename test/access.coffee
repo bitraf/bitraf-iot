@@ -26,6 +26,10 @@ cases = [
   # { topic: 'bitraf/guestbutton/lab/button', action: 'write', auth: 'none', permitted: false }
   # { topic: 'bitraf/guestbutton/lab/button', action: 'write', auth: 'door', permitted: true }
 
+  # Msgflo discovery
+  { topic: 'fbp', action: 'write', auth: 'door', permitted: true }
+  { topic: 'fbp', action: 'write', auth: 'none', permitted: true }
+
   # everyone should be able to use other topics
   { topic: '/public/fofofo', action: 'write', auth: 'none', permitted: true }
   { topic: 'role.PORT', action: 'write', auth: 'none', permitted: true } # msgflo default convention
