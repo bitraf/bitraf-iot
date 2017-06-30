@@ -20,6 +20,8 @@
   "dependencies": {
     "coffee-script": "^1.10.0",
     "fbp": "^1.5.0",
+    "metar": "^1.0.0",
+    "metar-taf": "0.0.2",
     "mqtt": "~2.8.0",
     "msgflo": "^0.10.19",
     "msgflo-nodejs": "^0.10.5"
