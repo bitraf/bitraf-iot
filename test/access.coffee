@@ -70,13 +70,12 @@ testAccess = (state, testcase) ->
       @timeout 4000
       auth = authentication[testcase.auth]
       options =
-        protocolId: 'MQIsdp' # MQTT 3.1
-        protocolVersion: 3 # MQTT 3.1
         username: auth.username
         password: auth.password      
       client = mqtt.connect brokerUrl, options
       connected = false
       client.once 'error', (err) ->
+        debug 'client error', err
         return done err
       client.on 'connect', () ->
         done() if not connected
