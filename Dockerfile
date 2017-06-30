@@ -3,9 +3,6 @@ FROM node:6
 # Export the Websocket port for Flowhub connection
 EXPOSE 3569
 
-# Reduce npm install verbosity, overflows Travis CI log view
-ENV NPM_CONFIG_LOGLEVEL warn
-
 RUN mkdir -p /var/bitraf-iot
 WORKDIR /var/bitraf-iot
 
@@ -19,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip install -r requirements.pip
 
 # Install MsgFlo and dependencies
-RUN npm install
+RUN NPM_CONFIG_LOGLEVEL=warn npm install
 
 # Map the volumes
 VOLUME /var/bitraf-iot/graphs /var/bitraf-iot/components /var/bitraf-iot/spec
