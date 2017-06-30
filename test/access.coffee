@@ -22,6 +22,10 @@ cases = [
   { topic: '/bitraf/door/2floor/isopen', action: 'write', auth: 'none', permitted: false }
   { topic: '/bitraf/door/2floor/openuntil', action: 'write', auth: 'none', permitted: false }
 
+  # Disabled, currently prod unit sends all the time, confusing test
+  # { topic: 'bitraf/guestbutton/lab/button', action: 'write', auth: 'none', permitted: false }
+  # { topic: 'bitraf/guestbutton/lab/button', action: 'write', auth: 'door', permitted: true }
+
   # everyone should be able to use other topics
   { topic: '/public/fofofo', action: 'write', auth: 'none', permitted: true }
   { topic: 'role.PORT', action: 'write', auth: 'none', permitted: true } # msgflo default convention
@@ -66,13 +70,12 @@ testAccess = (state, testcase) ->
       @timeout 4000
       auth = authentication[testcase.auth]
       options =
-        protocolId: 'MQIsdp' # MQTT 3.1
-        protocolVersion: 3 # MQTT 3.1
         username: auth.username
         password: auth.password      
       client = mqtt.connect brokerUrl, options
       connected = false
       client.once 'error', (err) ->
+        debug 'client error', err
         return done err
       client.on 'connect', () ->
         done() if not connected
@@ -98,12 +101,12 @@ testAccess = (state, testcase) ->
       runExpects = () ->
         chai.expect(gotReply).to.be.a 'boolean'
         if testcase.permitted
-          chai.expect(gotReply).to.equal true
+          chai.expect(gotReply, 'no reply').to.equal true
         else
-          chai.expect(gotReply).to.equal false
+          chai.expect(gotReply, 'got reply').to.equal false
         return done()
 
-      sendMessage = 'XXX'
+      sendMessage = 'XXX-' + description
       client.subscribe testcase.topic, (err) ->
         chai.expect(err).to.not.exist
 
