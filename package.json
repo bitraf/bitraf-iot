@@ -7,6 +7,10 @@
     "test": "mocha --reporter spec --compilers .coffee:coffee-script/register ./test/*.coffee",
     "start": "msgflo --graph graphs/doorsystem.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitraf/bitraf-iot.git"
+  },
   "keywords": [
     "MQTT",
     "MsgFlo"
