@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec --compilers .coffee:coffee-script/register ./test/*.coffee",
-    "start": "msgflo --graph graphs/doorsystem.json --wait-timeout 600"
+    "start": "msgflo --graph graphs/doorsystem.json --wait-timeout 600 --ignore 2floor --ignore 4floor --ignore frontdoor"
   },
   "repository": {
     "type": "git",
