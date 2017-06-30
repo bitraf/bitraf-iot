@@ -24,7 +24,8 @@ cases = [
   { topic: '/bitraf/door/2floor/isopen', action: 'write', auth: 'none', permitted: false }
   { topic: '/bitraf/door/2floor/openuntil', action: 'write', auth: 'none', permitted: false }
 
-  { topic: 'bitraf/guestbutton/lab/button', action: 'write', auth: 'none', permitted: false }
+  # Disabled, currently prod unit sends all the time, confusing test
+  # { topic: 'bitraf/guestbutton/lab/button', action: 'write', auth: 'none', permitted: false }
 
   # everyone should be able to use other topics
   { topic: '/public/fofofo', action: 'write', auth: 'none', permitted: true }
