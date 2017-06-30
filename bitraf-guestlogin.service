@@ -1,5 +1,5 @@
 [Service]
-ExecStart=/usr/bin/python2 /var/www/.local/bin/msgflo-python /home/webapps/bitraf-iot/participants/GuestLogin.py guestlogin
+ExecStart=/usr/bin/python2 /var/www/.local/bin/msgflo-python /home/webapps/bitraf-iot/components/GuestLogin.py guestlogin
 WorkingDirectory=/
 Restart=always
 User=www-data
