@@ -4,10 +4,10 @@ icon: thermometer-empty
 inports: {}
 outports:
   temperature:
-    queue: bitraf/temperature/1/value
+    queue: bitraf/temperature/1
     type: number
     description: 'degrees Celcius'
   humidity:
-    queue: bitraf/humidity/1/value
+    queue: bitraf/humidity/1
     type: number
     description: 'Percentage'
