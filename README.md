@@ -11,6 +11,19 @@ with a broker running on `mqtt.bitraf.no` (default port, 1883).
 
 # [TODO](./TODO.md)
 
+## Running locally
+
+* Install and start a [Mosquitto](https://mosquitto.org/) message broker
+* Install the Node.js dependencies of this project with `npm install`
+* Install the Python dependencies of this project with `pip install -r requirements.pip`
+* Start the MsgFlo broker with `MSGFLO_BROKER=mqtt://localhost npm start`
+
+## Running with Docker
+
+* Ensure you have a running Docker daemon
+* Start the project with `docker-compose up`
+
+Note: by default the MsgFlo coordinator and MQTT ports are only available on `localhost`. Edit the ports declarations in `docker-compose.yml` if you want to open them to the outside.
 
 ## Running [tests](./test)
 

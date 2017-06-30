@@ -7,6 +7,10 @@
     "test": "mocha --reporter spec --compilers .coffee:coffee-script/register ./test/*.coffee",
     "start": "msgflo --graph graphs/doorsystem.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitraf/bitraf-iot.git"
+  },
   "keywords": [
     "MQTT",
     "MsgFlo"
@@ -23,12 +27,13 @@
   "msgflo": {
     "namespace": "",
     "components": {
-       "DoorLock": "dlock13 #ROLE #ROLE.gpio"
+      "DoorLock": "dlock13 #ROLE #ROLE.gpio"
     }
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "debug": "^2.2.0",
+    "fbp-spec": "^0.2.1",
     "mocha": "^3.1.0"
   }
 }
