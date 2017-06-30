@@ -5,3 +5,5 @@ node_modules/
 /*.deb
 /*.build
 /*.changes
+config.h
+*.pyc
