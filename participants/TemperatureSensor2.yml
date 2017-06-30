@@ -1,0 +1,13 @@
+component: TemperatureSensor2
+label: Measures temperature and humidity
+icon: thermometer-empty
+inports: {}
+outports:
+  temperature:
+    queue: bitraf/temperature/2/value
+    type: number
+    description: 'degrees Celcius'
+  humidity:
+    queue: bitraf/humidity/2/value
+    type: number
+    description: 'Percentage'

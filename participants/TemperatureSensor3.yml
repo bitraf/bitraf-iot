@@ -1,0 +1,9 @@
+component: TemperatureSensor1
+label: Measures temperature
+icon: thermometer-empty
+inports: {}
+outports:
+  temperature:
+    queue: bitraf/temperature/3/value
+    type: number
+    description: 'degrees Celcius'
