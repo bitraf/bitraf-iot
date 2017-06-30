@@ -64,7 +64,7 @@
                 "label": "4floor"
             }
         },
-        "guestbutton/lab": {
+        "bitraf/guestbutton/lab": {
             "component": "bitraf/LedButton",
             "metadata": {
                 "x": 144,
