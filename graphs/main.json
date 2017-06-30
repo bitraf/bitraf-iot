@@ -1,0 +1,395 @@
+{
+    "caseSensitive": false,
+    "properties": {
+        "name": "main",
+        "environment": {
+            "type": "msgflo"
+        }
+    },
+    "inports": {},
+    "outports": {},
+    "groups": [
+        {
+            "name": "Door locks",
+            "nodes": [
+                "2floor",
+                "4floor",
+                "frontdoor"
+            ],
+            "metadata": {
+                "description": ""
+            }
+        },
+        {
+            "name": "Environment",
+            "nodes": [
+                "temp4floor",
+                "templaboffice",
+                "tempoutside4th"
+            ],
+            "metadata": {
+                "description": ""
+            }
+        },
+        {
+            "name": "Logging",
+            "nodes": [
+                "floor2",
+                "floor4",
+                "outside"
+            ],
+            "metadata": {
+                "description": ""
+            }
+        }
+    ],
+    "processes": {
+        "2floor": {
+            "component": "DoorLock",
+            "metadata": {
+                "x": 576,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "2floor"
+            }
+        },
+        "4floor": {
+            "component": "DoorLock",
+            "metadata": {
+                "x": 576,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "4floor"
+            }
+        },
+        "guestbutton/lab": {
+            "component": "bitraf/LedButton",
+            "metadata": {
+                "x": 144,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "guestbutton/lab"
+            }
+        },
+        "doorstatus": {
+            "component": "DoorStatus",
+            "metadata": {
+                "x": 720,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "doorstatus"
+            }
+        },
+        "floor2": {
+            "component": "openmct/floor2",
+            "metadata": {
+                "x": 216,
+                "y": 576,
+                "width": 72,
+                "height": 72,
+                "label": "floor2"
+            }
+        },
+        "floor4": {
+            "component": "openmct/floor4",
+            "metadata": {
+                "x": 216,
+                "y": 360,
+                "width": 72,
+                "height": 72,
+                "label": "floor4"
+            }
+        },
+        "frontdoor": {
+            "component": "DoorLock",
+            "metadata": {
+                "x": 576,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "frontdoor"
+            }
+        },
+        "guestlogin": {
+            "component": "GuestLogin",
+            "metadata": {
+                "x": 288,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "guestlogin"
+            }
+        },
+        "outside": {
+            "component": "openmct/outside",
+            "metadata": {
+                "x": 216,
+                "y": 468,
+                "width": 72,
+                "height": 72,
+                "label": "outside"
+            }
+        },
+        "temp4floor": {
+            "component": "TemperatureSensor2",
+            "metadata": {
+                "x": 36,
+                "y": 360,
+                "width": 72,
+                "height": 72,
+                "label": "4th floor"
+            }
+        },
+        "templaboffice": {
+            "component": "TemperatureSensor1",
+            "metadata": {
+                "x": 36,
+                "y": 576,
+                "width": 72,
+                "height": 72,
+                "label": "Lab office"
+            }
+        },
+        "tempoutside4th": {
+            "component": "TemperatureSensor1",
+            "metadata": {
+                "x": 36,
+                "y": 468,
+                "width": 72,
+                "height": 72,
+                "label": "Outside (4th floor)"
+            }
+        },
+        "tv": {
+            "component": "InfoDisplay",
+            "metadata": {
+                "x": 576,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "tv"
+            }
+        },
+        "webui": {
+            "component": "WebUi",
+            "metadata": {
+                "x": 288,
+                "y": 180,
+                "width": 72,
+                "height": 72,
+                "label": "webui"
+            }
+        },
+        "welcome": {
+            "component": "WelcomeMessage",
+            "metadata": {
+                "x": 432,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "welcome"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "2floor",
+                "port": "isopen"
+            },
+            "tgt": {
+                "process": "doorstatus",
+                "port": "isopen"
+            },
+            "metadata": {
+                "route": 4
+            }
+        },
+        {
+            "src": {
+                "process": "guestbutton/lab",
+                "port": "button"
+            },
+            "tgt": {
+                "process": "guestlogin",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "doorstatus",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "guestbutton/lab",
+                "port": "led"
+            },
+            "metadata": {
+                "route": 4
+            }
+        },
+        {
+            "src": {
+                "process": "guestlogin",
+                "port": "opendownstairs"
+            },
+            "tgt": {
+                "process": "2floor",
+                "port": "open"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "guestlogin",
+                "port": "openfront"
+            },
+            "tgt": {
+                "process": "frontdoor",
+                "port": "open"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "temp4floor",
+                "port": "humidity"
+            },
+            "tgt": {
+                "process": "floor4",
+                "port": "humidity"
+            },
+            "metadata": {
+                "route": 9
+            }
+        },
+        {
+            "src": {
+                "process": "temp4floor",
+                "port": "temperature"
+            },
+            "tgt": {
+                "process": "floor4",
+                "port": "temperature"
+            },
+            "metadata": {
+                "route": 3
+            }
+        },
+        {
+            "src": {
+                "process": "templaboffice",
+                "port": "humidity"
+            },
+            "tgt": {
+                "process": "floor2",
+                "port": "humidity"
+            },
+            "metadata": {
+                "route": 9
+            }
+        },
+        {
+            "src": {
+                "process": "templaboffice",
+                "port": "temperature"
+            },
+            "tgt": {
+                "process": "floor2",
+                "port": "temperature"
+            },
+            "metadata": {
+                "route": 3
+            }
+        },
+        {
+            "src": {
+                "process": "tempoutside4th",
+                "port": "temperature"
+            },
+            "tgt": {
+                "process": "outside",
+                "port": "temperature"
+            },
+            "metadata": {
+                "route": 3
+            }
+        },
+        {
+            "src": {
+                "process": "webui",
+                "port": "memberlogin"
+            },
+            "tgt": {
+                "process": "welcome",
+                "port": "name"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "webui",
+                "port": "openfrontdoor"
+            },
+            "tgt": {
+                "process": "frontdoor",
+                "port": "open"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "webui",
+                "port": "openlab"
+            },
+            "tgt": {
+                "process": "2floor",
+                "port": "open"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "webui",
+                "port": "openoffice"
+            },
+            "tgt": {
+                "process": "4floor",
+                "port": "open"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "welcome",
+                "port": "message"
+            },
+            "tgt": {
+                "process": "tv",
+                "port": "text"
+            },
+            "metadata": {
+                "route": 7
+            }
+        }
+    ]
+}
