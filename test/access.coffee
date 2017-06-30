@@ -101,12 +101,12 @@ testAccess = (state, testcase) ->
       runExpects = () ->
         chai.expect(gotReply).to.be.a 'boolean'
         if testcase.permitted
-          chai.expect(gotReply).to.equal true
+          chai.expect(gotReply, 'no reply').to.equal true
         else
-          chai.expect(gotReply).to.equal false
+          chai.expect(gotReply, 'got reply').to.equal false
         return done()
 
-      sendMessage = 'XXX'
+      sendMessage = 'XXX-' + description
       client.subscribe testcase.topic, (err) ->
         chai.expect(err).to.not.exist
 
