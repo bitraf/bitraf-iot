@@ -211,7 +211,7 @@
         },
         {
             "src": {
-                "process": "guestbutton/lab",
+                "process": "bitraf/guestbutton/lab",
                 "port": "button"
             },
             "tgt": {
@@ -228,7 +228,7 @@
                 "port": "out"
             },
             "tgt": {
-                "process": "guestbutton/lab",
+                "process": "bitraf/guestbutton/lab",
                 "port": "led"
             },
             "metadata": {

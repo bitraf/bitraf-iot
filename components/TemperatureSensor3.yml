@@ -1,4 +1,4 @@
-component: TemperatureSensor1
+component: TemperatureSensor3
 label: Measures temperature
 icon: thermometer-empty
 inports: {}
