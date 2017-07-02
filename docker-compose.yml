@@ -4,7 +4,7 @@ services:
     image: ansi/mosquitto
     container_name: bitraf-mqtt
     ports:
-      - '127.0.0.1:1883:1883'
+      - '1883:1883'
     entrypoint: /usr/local/sbin/mosquitto
   influxdb:
     image: influxdb
