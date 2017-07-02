@@ -1,0 +1,11 @@
+component: bitraf/LedButton
+label: ''
+icon: ''
+inports:
+  led:
+    queue: bitraf/guestbutton/lab/led
+    type: boolean
+outports:
+  button:
+    queue: bitraf/guestbutton/lab/button
+    type: any
