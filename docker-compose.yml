@@ -8,7 +8,7 @@ services:
     entrypoint: /usr/local/sbin/mosquitto
   influxdb:
     image: influxdb
-    container_name: influxdb
+    container_name: bitraf-influxdb
     ports:
       - '127.0.0.1:8086:8086'
   msgflo:
@@ -22,7 +22,7 @@ services:
       - mqtt
   openmct:
     image: cbase/cbeam-telemetry-server
-    container_name: cbeam-telemetry-server
+    container_name: bitraf-openmct
     entrypoint: node bitraf.js
     environment:
       MSGFLO_BROKER: 'mqtt://mqtt:1883'
