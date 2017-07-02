@@ -226,6 +226,16 @@
                 "height": 72,
                 "label": "welcome"
             }
+        },
+        "Time_mqbye": {
+            "component": "Time",
+            "metadata": {
+                "label": "Time",
+                "x": 360,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
         }
     },
     "connections": [
