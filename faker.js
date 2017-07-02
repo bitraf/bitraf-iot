@@ -47,11 +47,65 @@ var announceFakes = function (client) {
   });
 };
 
+var previousSend = {};
+var sendFakes = function (client) {
+  fakeSensors.forEach(function (sensor) {
+    sensor.payload.outports.forEach(function (port) {
+      var prevKey = sensor.payload.id + ':' + port.id;
+      var random = Math.random();
+      if (port.type === 'boolean') {
+        if (typeof previousSend[prevKey] === 'undefined') {
+          previousSend[prevKey] = false;
+        }
+        var val = previousSend[prevKey];
+        if (random < 0.3) {
+          // 30% chance to flip the boolean
+          val = val ? false : true;
+        }
+        client.publish(port.queue, JSON.stringify(val));
+        previousSend[prevKey] = val;
+        return;
+      }
+      if (port.type === 'int') {
+        if (typeof previousSend[prevKey] === 'undefined') {
+          previousSend[prevKey] = 20;
+        }
+        var val = previousSend[prevKey];
+        if (random > 0.5) {
+          val++
+        } else {
+          val--;
+        }
+        client.publish(port.queue, JSON.stringify(val));
+        previousSend[prevKey] = val;
+        return;
+      }
+      if (port.type === 'number') {
+        if (typeof previousSend[prevKey] === 'undefined') {
+          previousSend[prevKey] = 23.8;
+        }
+        var val = previousSend[prevKey];
+        if (random > 0.5) {
+          val += random
+        } else {
+          val -= random;
+        }
+        client.publish(port.queue, JSON.stringify(val));
+        previousSend[prevKey] = val;
+        return;
+      }
+    });
+  });
+};
+
 connectFaker(function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
   }
+  setInterval(function () {
+    sendFakes(client);
+  }, 2000);
   setInterval(function () {
     announceFakes(client);
   }, 30000);
