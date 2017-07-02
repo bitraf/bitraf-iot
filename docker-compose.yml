@@ -23,7 +23,7 @@ services:
   openmct:
     image: cbase/cbeam-telemetry-server
     container_name: cbeam-telemetry-server
-    command: node bitraf.js
+    entrypoint: node bitraf.js
     environment:
       MSGFLO_BROKER: 'mqtt://mqtt:1883'
       INFLUX_HOST: influxdb
