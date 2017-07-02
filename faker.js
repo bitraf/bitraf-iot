@@ -89,9 +89,9 @@ var sendFakes = function (client) {
         }
         var val = previousSend[prevKey];
         if (random > 0.5) {
-          val += random
+          val += 0.01
         } else {
-          val -= random;
+          val -= 0.01;
         }
         client.publish(port.queue, JSON.stringify(val));
         previousSend[prevKey] = val;
