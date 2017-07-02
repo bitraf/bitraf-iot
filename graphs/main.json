@@ -227,7 +227,7 @@
                 "label": "welcome"
             }
         },
-        "Time_mqbye": {
+        "Time": {
             "component": "Time",
             "metadata": {
                 "label": "Time",
@@ -523,6 +523,13 @@
             },
             "metadata": {
                 "route": 7
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "Time",
+                "port": "start"
             }
         }
     ]
