@@ -108,7 +108,7 @@ connectFaker(function (err, client) {
   }
   setInterval(function () {
     sendFakes(client);
-  }, 2000);
+  }, 10000);
   setInterval(function () {
     announceFakes(client);
   }, 30000);
