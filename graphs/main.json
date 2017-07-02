@@ -21,22 +21,25 @@
             }
         },
         {
-            "name": "Environment",
+            "name": "Logging",
             "nodes": [
-                "temp4floor",
-                "templaboffice",
-                "tempoutside4th"
+                "floor2",
+                "floor3",
+                "floor4",
+                "outside"
             ],
             "metadata": {
                 "description": ""
             }
         },
         {
-            "name": "Logging",
+            "name": "Environment",
             "nodes": [
-                "floor2",
-                "floor4",
-                "outside"
+                "bitraf/windowsensor/workshop",
+                "public/motionsensor/lab",
+                "temp4floor",
+                "templaboffice",
+                "tempoutside4th"
             ],
             "metadata": {
                 "description": ""
@@ -47,8 +50,8 @@
         "2floor": {
             "component": "DoorLock",
             "metadata": {
-                "x": 576,
-                "y": 36,
+                "x": 360,
+                "y": 612,
                 "width": 72,
                 "height": 72,
                 "label": "2floor"
@@ -57,8 +60,8 @@
         "4floor": {
             "component": "DoorLock",
             "metadata": {
-                "x": 576,
-                "y": 252,
+                "x": 360,
+                "y": 864,
                 "width": 72,
                 "height": 72,
                 "label": "4floor"
@@ -67,18 +70,28 @@
         "bitraf/guestbutton/lab": {
             "component": "bitraf/LedButton",
             "metadata": {
-                "x": 144,
-                "y": 36,
+                "x": -72,
+                "y": 612,
                 "width": 72,
                 "height": 72,
-                "label": "guestbutton/lab"
+                "label": "bitraf/guestbutton/lab"
+            }
+        },
+        "bitraf/windowsensor/workshop": {
+            "component": "bitraf/WindowSensor",
+            "metadata": {
+                "x": 756,
+                "y": 1008,
+                "width": 72,
+                "height": 72,
+                "label": "bitraf/windowsensor/workshop"
             }
         },
         "doorstatus": {
             "component": "DoorStatus",
             "metadata": {
-                "x": 720,
-                "y": 36,
+                "x": 540,
+                "y": 612,
                 "width": 72,
                 "height": 72,
                 "label": "doorstatus"
@@ -87,18 +100,28 @@
         "floor2": {
             "component": "openmct/floor2",
             "metadata": {
-                "x": 216,
-                "y": 576,
+                "x": 1044,
+                "y": 216,
                 "width": 72,
                 "height": 72,
                 "label": "floor2"
             }
         },
+        "floor3": {
+            "component": "openmct/floor3",
+            "metadata": {
+                "x": 1080,
+                "y": 1008,
+                "width": 72,
+                "height": 72,
+                "label": "floor3"
+            }
+        },
         "floor4": {
             "component": "openmct/floor4",
             "metadata": {
-                "x": 216,
-                "y": 360,
+                "x": 1080,
+                "y": 864,
                 "width": 72,
                 "height": 72,
                 "label": "floor4"
@@ -107,8 +130,8 @@
         "frontdoor": {
             "component": "DoorLock",
             "metadata": {
-                "x": 576,
-                "y": 144,
+                "x": 360,
+                "y": 756,
                 "width": 72,
                 "height": 72,
                 "label": "frontdoor"
@@ -117,8 +140,8 @@
         "guestlogin": {
             "component": "GuestLogin",
             "metadata": {
-                "x": 288,
-                "y": 36,
+                "x": 72,
+                "y": 612,
                 "width": 72,
                 "height": 72,
                 "label": "guestlogin"
@@ -127,18 +150,28 @@
         "outside": {
             "component": "openmct/outside",
             "metadata": {
-                "x": 216,
-                "y": 468,
+                "x": 1080,
+                "y": 720,
                 "width": 72,
                 "height": 72,
                 "label": "outside"
             }
         },
+        "public/motionsensor/lab": {
+            "component": "bitraf/PirMotionSensor",
+            "metadata": {
+                "x": 756,
+                "y": 468,
+                "width": 72,
+                "height": 72,
+                "label": "public/motionsensor/lab"
+            }
+        },
         "temp4floor": {
             "component": "TemperatureSensor2",
             "metadata": {
-                "x": 36,
-                "y": 360,
+                "x": 756,
+                "y": 792,
                 "width": 72,
                 "height": 72,
                 "label": "4th floor"
@@ -147,8 +180,8 @@
         "templaboffice": {
             "component": "TemperatureSensor1",
             "metadata": {
-                "x": 36,
-                "y": 576,
+                "x": 756,
+                "y": 216,
                 "width": 72,
                 "height": 72,
                 "label": "Lab office"
@@ -157,8 +190,8 @@
         "tempoutside4th": {
             "component": "TemperatureSensor3",
             "metadata": {
-                "x": 36,
-                "y": 468,
+                "x": 756,
+                "y": 612,
                 "width": 72,
                 "height": 72,
                 "label": "Outside (4th floor)"
@@ -167,8 +200,8 @@
         "tv": {
             "component": "InfoDisplay",
             "metadata": {
-                "x": 576,
-                "y": 432,
+                "x": 360,
+                "y": 1008,
                 "width": 72,
                 "height": 72,
                 "label": "tv"
@@ -177,8 +210,8 @@
         "webui": {
             "component": "WebUi",
             "metadata": {
-                "x": 288,
-                "y": 180,
+                "x": 72,
+                "y": 792,
                 "width": 72,
                 "height": 72,
                 "label": "webui"
@@ -187,8 +220,8 @@
         "welcome": {
             "component": "WelcomeMessage",
             "metadata": {
-                "x": 432,
-                "y": 432,
+                "x": 216,
+                "y": 1008,
                 "width": 72,
                 "height": 72,
                 "label": "welcome"
@@ -211,6 +244,32 @@
         },
         {
             "src": {
+                "process": "2floor",
+                "port": "isopen"
+            },
+            "tgt": {
+                "process": "floor2",
+                "port": "isopen"
+            },
+            "metadata": {
+                "route": 4
+            }
+        },
+        {
+            "src": {
+                "process": "4floor",
+                "port": "isopen"
+            },
+            "tgt": {
+                "process": "floor4",
+                "port": "isopen"
+            },
+            "metadata": {
+                "route": 4
+            }
+        },
+        {
+            "src": {
                 "process": "bitraf/guestbutton/lab",
                 "port": "button"
             },
@@ -224,12 +283,64 @@
         },
         {
             "src": {
+                "process": "bitraf/windowsensor/workshop",
+                "port": "sensor1"
+            },
+            "tgt": {
+                "process": "floor3",
+                "port": "window1"
+            },
+            "metadata": {
+                "route": 6
+            }
+        },
+        {
+            "src": {
+                "process": "bitraf/windowsensor/workshop",
+                "port": "sensor2"
+            },
+            "tgt": {
+                "process": "floor3",
+                "port": "window2"
+            },
+            "metadata": {
+                "route": 6
+            }
+        },
+        {
+            "src": {
+                "process": "bitraf/windowsensor/workshop",
+                "port": "sensor3"
+            },
+            "tgt": {
+                "process": "floor3",
+                "port": "window3"
+            },
+            "metadata": {
+                "route": 6
+            }
+        },
+        {
+            "src": {
                 "process": "doorstatus",
                 "port": "out"
             },
             "tgt": {
                 "process": "bitraf/guestbutton/lab",
                 "port": "led"
+            },
+            "metadata": {
+                "route": 4
+            }
+        },
+        {
+            "src": {
+                "process": "frontdoor",
+                "port": "isopen"
+            },
+            "tgt": {
+                "process": "outside",
+                "port": "isopen"
             },
             "metadata": {
                 "route": 4
@@ -259,6 +370,19 @@
             },
             "metadata": {
                 "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "public/motionsensor/lab",
+                "port": "motion"
+            },
+            "tgt": {
+                "process": "floor2",
+                "port": "motion"
+            },
+            "metadata": {
+                "route": 10
             }
         },
         {
