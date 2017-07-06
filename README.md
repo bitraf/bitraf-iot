@@ -11,6 +11,17 @@ with a broker running on `mqtt.bitraf.no` (default port, 1883).
 
 # [TODO](./TODO.md)
 
+# Things
+
+* [Doorlocks](https://github.com/bitraf/dlock13)
+* [Door openers](./singlebutton)
+* [Tool lock](https://github.com/einsmein/bitraf-thelock)
+* [Machine on/off (electrical current)](https://github.com/slunke/onoffsensor)
+* [Window open/close detection (Hall effect)](https://github.com/Poohma/IOT_Window_Hall_sensors)
+* [Window openers/closers](https://github.com/apetrynet/altF4)
+
+# Developing
+
 ## Running locally
 
 * Install and start a [Mosquitto](https://mosquitto.org/) message broker
@@ -29,3 +40,5 @@ Note: by default the MsgFlo coordinator and MQTT ports are only available on `lo
 
     npm install # once
     npm test
+
+
