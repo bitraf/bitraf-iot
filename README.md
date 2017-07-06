@@ -7,18 +7,26 @@ with a broker running on `mqtt.bitraf.no` (default port, 1883).
 
 # Live view
 
-[Open live view of the network using Flowhub](http://iot.bitraf.no/live)
+[OpenMCT dashboard with graphs of historical data](http://iot.bitraf.no:8080)
 
-# [TODO](./TODO.md)
+[Open live view of the network in Flowhub](http://iot.bitraf.no/live)
 
 # Things
+
+In use
 
 * [Doorlocks](https://github.com/bitraf/dlock13)
 * [Door openers](./singlebutton)
 * [Tool lock](https://github.com/einsmein/bitraf-thelock)
-* [Machine on/off (electrical current)](https://github.com/slunke/onoffsensor)
 * [Window open/close detection (Hall effect)](https://github.com/Poohma/IOT_Window_Hall_sensors)
+* [Motion sensor (PIR)](./PirMotionSensor)
+
+In development
+
 * [Window openers/closers](https://github.com/apetrynet/altF4)
+* [Machine on/off (electrical current)](https://github.com/slunke/onoffsensor)
+
+# [TODO](./TODO.md)
 
 # Developing
 
