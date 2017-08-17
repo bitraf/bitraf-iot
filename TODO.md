@@ -1,10 +1,15 @@
 
 # TODO
 
-## Split door control in webinterface
+## Physical dooropener/status
 
-* Update the sender script to take `DOOR` and maybe `DURATION` arguments
-* Update door-web UI to have multiple buttons, and pass the DOOR argument
+* Reduce the spam from the guestbutton, currently always sending every 100ms
+* Visualize the state where frontdoor+lab is open differently from only lab open.
+This to provide feedback when lab is (still) open, and hitting button to open front again.
+Two levels of light (using PWM)? 
+* Detect when doorbell rings and send on MQTT.
+Either on `BUS` input to phone, or on the telefone speaker output.
+* Make the doorbell ringing blink the guest login LED
 
 ## Error handling in door webinterface
 
@@ -12,18 +17,16 @@
 * Webinterface should assert that door did in fact open successfully.
 Could maybe use the Python wrapper code?
 
-## Physical dooropener/status
-
-* Reduce the spam from the guestbutton, currently always sending every 100ms 
-* Detect when doorbell rings and send on MQTT.
-Either on `BUS` input to phone, or on the telefone speaker output.
-* Make the doorbell ringing blink the guest login LED
-
 ## Dynamic reconfiguration
 
-* Fix Msgflo runtime not running
-* (Flowhub/Msgflo) Support [read-only access](https://github.com/msgflo/msgflo/issues/37)
-* (Flowhub) Respect changes coming from runtime side
+* Fix Msgflo runtime/container not running
+
+## More door data
+
+* Add reed-switch sensors to each of the doors
+* Log them to InfluxDB
+* Combined with doorbell should be able to tell when/if people are let in
+* In case of problems can be used together with authentication log to check access
 
 ## Radio
 
@@ -38,15 +41,6 @@ we would like to have a single button (by the door) to turn their power off.
 * Install standard 433Mhz power control for 230v on lab-benches, 3d-printers
 * Deploy a two-way bridge `MQTT<->433MHz` bridge
 * Create a controller with buttons for on/off
-
-## Kickoff workshop
-
-Documentation
-
-* Generate HTML API docs with topic info from participant data
-* Add sensor/actuator using ESP8266+Diller
-* Add sensor/actuator using RPi/BB + msgflo-cpp
-* How to wire together things using MsgFlo
 
 ## Wanted MQTT services
 
