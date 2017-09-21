@@ -7,6 +7,7 @@
 #include <PubSubClient.h>
 
 #include "./config.h"
+#include "./ledcontrol.hpp"
 
 struct Config {
   const int ledPin = 14;
@@ -32,6 +33,9 @@ msgflo::Engine *engine;
 msgflo::OutPort *buttonPort;
 msgflo::InPort *ledPort;
 
+ledcontrol::Parameters ledParameters;
+ledcontrol::State ledState;
+
 void setup() {
   Serial.begin(115200);
   delay(100);
@@ -52,8 +56,7 @@ void setup() {
   ledPort = engine->addInPort("led", "boolean", cfg.role+"/led",
   [](byte *data, int length) -> void {
       const std::string in((char *)data, length);
-      const boolean on = (in == "1" || in == "true");
-      digitalWrite(cfg.ledPin, on);
+      ledParameters = ledcontrol::parse(in);
   });
 
   Serial.printf("Led pin: %d\r\n", cfg.ledPin);
@@ -79,6 +82,12 @@ void loop() {
       connected = false;
       Serial.println("Lost wifi connection.");
     }
+  }
+
+  // LED control
+  const int pwm = ledcontrol::next(ledState, ledParameters, millis());
+  if (pwm > 0) {
+    analogWrite(pwm, cfg.ledPin);
   }
 
   // Send immediately on state change, else periodically  
