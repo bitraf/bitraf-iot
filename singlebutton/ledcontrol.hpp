@@ -1,6 +1,7 @@
 
 #include <string>
 #include <stdio.h>
+#include <ArduinoJson.h>
 
 namespace ledcontrol {
 
@@ -33,16 +34,25 @@ Parameters parse(const std::string &in) {
         return p;
     }
     Parameters params;
+
+    StaticJsonBuffer<200> jsonBuffer; // fails if smaller than 200
+    JsonVariant root = jsonBuffer.parse(in);
+    if (!root.success()) {
+        return Parameters {};
+    }
+
     // Plain number
-    const int8_t pwm_tokens = sscanf(in.c_str(), "%d", &params.onpower);
-    if (pwm_tokens == 1) {
+    if (root.is<int>() ) {
         params.valid = true;
+        params.onpower = root.as<int>();
         return params;
     }
     // On/off animation
-    const int8_t onoff_tokens = sscanf(in.c_str(), "onoff(%d,%d,%d)",
-          &params.onpower, &params.offpower, &params.period);
-    if (onoff_tokens == 3) {
+    JsonObject &anim = root.as<JsonObject>();
+    if (anim.containsKey("animate")) {
+        params.onpower = anim["on"];
+        params.offpower = anim["off"];
+        params.period = anim["period"];
         params.valid = true;
         return params;
     }
