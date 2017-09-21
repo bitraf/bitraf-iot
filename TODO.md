@@ -3,7 +3,6 @@
 
 ## Physical dooropener/status
 
-* Reduce the spam from the guestbutton, currently always sending every 100ms
 * Visualize the state where frontdoor+lab is open differently from only lab open.
 This to provide feedback when lab is (still) open, and hitting button to open front again.
 Two levels of light (using PWM)? 
@@ -13,7 +12,6 @@ Either on `BUS` input to phone, or on the telefone speaker output.
 
 ## Error handling in door webinterface
 
-* Deploy fix for overeager post-condition in doorlocks
 * Webinterface should assert that door did in fact open successfully.
 Could maybe use the Python wrapper code?
 
