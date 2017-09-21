@@ -32,8 +32,6 @@ msgflo::Engine *engine;
 msgflo::OutPort *buttonPort;
 msgflo::InPort *ledPort;
 
-long nextButtonCheck = 0;
-
 void setup() {
   Serial.begin(115200);
   delay(100);
@@ -67,6 +65,8 @@ void setup() {
 
 void loop() {
   static bool connected = false;
+  static bool was_pressed = false;
+  static long nextUpdate = 0;
 
   if (WiFi.status() == WL_CONNECTED) {
     if (!connected) {
@@ -81,11 +81,15 @@ void loop() {
     }
   }
 
-  // TODO: check for statechange. If changed, send right away. Else only send every 3 seconds or so
-  if (millis() > nextButtonCheck) {
-    const bool pressed = !digitalRead(cfg.buttonPin);
+  // Send immediately on state change, else periodically  
+  const bool pressed = !digitalRead(cfg.buttonPin);
+  if (pressed != was_pressed) {
     buttonPort->send(pressed ? "true" : "false");
-    nextButtonCheck += 100;
+  }
+  was_pressed = pressed;
+  if (millis() > nextUpdate) {
+    buttonPort->send(pressed ? "true" : "false");
+    nextUpdate += 30*1000;
   }
 
 }
