@@ -1,6 +1,8 @@
 
 #include <string>
 #include <stdio.h>
+
+#define ARDUINOJSON_ENABLE_STD_STRING 1
 #include <ArduinoJson.h>
 
 namespace ledcontrol {
@@ -23,8 +25,8 @@ struct Parameters {
 
 Parameters parse(const std::string &in) {
     // Boolean
-    const bool on = (in == "1" || in == "true");
-    const bool off = (in == "0" || in == "false");
+    const bool on = in == "true";
+    const bool off = in == "false";
     if (on) {
         Parameters p(255);
         return p;
@@ -36,6 +38,7 @@ Parameters parse(const std::string &in) {
     Parameters params;
 
     StaticJsonBuffer<200> jsonBuffer; // fails if smaller than 200
+
     JsonVariant root = jsonBuffer.parse(in);
     if (!root.success()) {
         return Parameters {};

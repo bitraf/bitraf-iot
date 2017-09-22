@@ -64,6 +64,7 @@ void setup() {
 
   pinMode(cfg.buttonPin, INPUT_PULLUP);
   pinMode(cfg.ledPin, OUTPUT);
+  analogWriteRange(255);
 }
 
 void loop() {
@@ -86,8 +87,8 @@ void loop() {
 
   // LED control
   const int pwm = ledcontrol::next(ledState, ledParameters, millis());
-  if (pwm > 0) {
-    analogWrite(pwm, cfg.ledPin);
+  if (pwm >= 0) {
+    analogWrite(cfg.ledPin, pwm);
   }
 
   // Send immediately on state change, else periodically  
