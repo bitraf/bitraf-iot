@@ -1,0 +1,17 @@
+name: 'Oslo airport weather'
+topic: AirportWeather
+fixture:
+  type: 'fbp'
+  data: |
+    INPORT=weather.ICAO:ICAO
+    OUTPORT=weather.TEMPERATURE:TEMPERATURE
+    weather(AirportWeather)
+cases:
+-
+  name: 'fetching weather'
+  assertion: 'should return a temperature'
+  inputs:
+    icao: ENGM
+  expect:
+    temperature:
+      type: number
