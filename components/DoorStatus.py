@@ -8,13 +8,15 @@ import msgflo
 
 class Repeat(msgflo.Participant):
   def __init__(self, role):
-    self.current_input = False
+    self.frontdooropen = False
+    self.labopen = False
 
     d = {
       'component': 'DoorStatus',
       'label': 'Show current status of door',
       'inports': [
-        { 'id': 'isopen', 'type': 'boolean', 'queue': '/bitraf/door/2floor/isopen' },
+        { 'id': 'labopen', 'type': 'boolean', 'queue': '/bitraf/door/2floor/isopen' },
+        { 'id': 'frontdooropen', 'type': 'boolean', 'queue': '/bitraf/door/frontdoor/isopen' },
       ],
       'outports': [
         { 'id': 'out', 'type': 'boolean', 'queue': 'bitraf/guestbutton/lab/led' },
@@ -23,8 +25,17 @@ class Repeat(msgflo.Participant):
     msgflo.Participant.__init__(self, d, role)
 
   def process(self, inport, msg):
-    print 'received', inport, msg.data
+    if inport == 'labopen':
+        self.labopen = msg.data
+    if inport == 'frontdooropen':
+        self.frontdooropen = msg.data
 
-    self.send('out', msg.data)
+    light = False
+    if self.labopen and self.frontdooropen:
+        light = { "animate": "onoff", "period": 250, "on": 250, "off": 200 }
+    elif self.labopen:
+        light = 250
+
+    self.send('out', light)
 
     self.ack(msg)
