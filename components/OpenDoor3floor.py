@@ -14,8 +14,8 @@ class Repeat(msgflo.Participant):
       'component': 'OpenDoor3floor',
       'label': 'Trigger door opening from using button',
       'inports': [
-        { 'id': 'in', 'type': 'boolean', 'queue': 'bitraf/openbutton/workshop/button' },
-        { 'id': 'in', 'type': 'boolean', 'queue': 'bitraf/openbutton/office3rdfloor/button' },        
+        { 'id': 'in1', 'type': 'boolean', 'queue': 'bitraf/openbutton/workshop/button' },
+        { 'id': 'in2', 'type': 'boolean', 'queue': 'bitraf/openbutton/office3rdfloor/button' },        
       ],
       'outports': [
         { 'id': 'open3floor', 'type': 'int', 'queue': '/bitraf/door/3floor/open' },
