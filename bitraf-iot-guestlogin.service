@@ -1,0 +1,12 @@
+[Service]
+WorkingDirectory=/home/webapps/bitraf-iot
+ExecStart=/usr/bin/node ./node_modules/.bin/msgflo --graph graphs/doorsystem.fbp --broker mqtt://mqtt.bitraf.no
+Restart=always
+User=www-data
+Environment=PATH=/home/webapps/bitraf-iot/node_modules/.bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin DEBUG=msgflo*
+
+[Unit]
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target

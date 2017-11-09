@@ -1,0 +1,12 @@
+[Service]
+WorkingDirectory=/home/webapps/bitraf-iot
+ExecStart=/usr/local/bin/msgflo-python participants/DoorStatus.py doorstatus
+Restart=always
+User=www-data
+EnvironmentFile=/home/webapps/bitraf-iot/secrets.env
+
+[Unit]
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
