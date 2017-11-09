@@ -18,7 +18,8 @@ class Repeat(msgflo.Participant):
         { 'id': 'in2', 'type': 'boolean', 'queue': 'bitraf/openbutton/office3rdfloor/button' },        
       ],
       'outports': [
-        { 'id': 'open3floor', 'type': 'int', 'queue': '/bitraf/door/3floor/open' },
+        { 'id': 'open3workshop', 'type': 'int', 'queue': '/bitraf/door/3workshop/open' },
+        { 'id': 'open3office', 'type': 'int', 'queue': '/bitraf/door/3office/open' },
       ],
     }
     msgflo.Participant.__init__(self, d, role)
@@ -29,7 +30,8 @@ class Repeat(msgflo.Participant):
     trigger = msg.data == True and not self.current_input
     if trigger:
         door_time = 20 # seconds
-        self.send('open3floor', door_time)
+        self.send('open3workshop', door_time)
+        self.send('open3office', door_time)
         print 'tried to open doors'
 
     self.current_input = msg.data
