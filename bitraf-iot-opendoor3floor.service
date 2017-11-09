@@ -1,0 +1,15 @@
+[Service]
+WorkingDirectory=/home/webapps/bitraf-iot
+ExecStart=/usr/local/bin/msgflo-python components/OpenDoor3floor.py opendoor3floor
+Restart=always
+RestartSec=3
+User=www-data
+# Expects MSGFLO_BROKER to be set, including user:password.
+# you can use EnvironmentFile for that
+EnvironmentFile=
+
+[Unit]
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
