@@ -7,12 +7,13 @@
 WiFiClient client;
 
 
-Adafruit_MQTT_Client mqtt(&client, CFG_MQTT_HOST, CFG_MQTT_SERVERPORT, CFG_MQTT_USER, CFG_MQTT_PASSWORD);
+//Adafruit_MQTT_Client mqtt(&client, CFG_MQTT_HOST, CFG_MQTT_SERVERPORT, CFG_MQTT_USER, CFG_MQTT_PASSWORD);
+Adafruit_MQTT_Client mqtt(&client, CFG_MQTT_HOST, CFG_MQTT_SERVERPORT);
 const int analogInPin = A0; 
 int sensorValue = 0;
 
 
-Adafruit_MQTT_Publish strom = Adafruit_MQTT_Publish(&mqtt, CFG_MQTT_USER "public/current/shopbot");
+Adafruit_MQTT_Publish current = Adafruit_MQTT_Publish(&mqtt, "bitraf/currentsensor/shopbot");
 
 void MQTT_connect();
 
@@ -47,25 +48,24 @@ void loop() {
   int value = readCurrent();
 
   // Now we can publish stuff!
-  Serial.print(F("\nSending current val"));
+  Serial.print(F("\nSending current value "));
   Serial.print(value);
   Serial.print("...");
- // if (! photocell.publish(value)) {
- //   Serial.println(F("Failed"));
- // } else {
- //   Serial.println(F("OK!"));
-//  }
-    //   delay(60000);  
-       delay(600);  
+  if (!current.publish(value)) {
+    Serial.println(F("Failed"));
+  } else {
+    Serial.println(F("OK!"));
+  }
+       delay(60000);  
 }
 
 int readCurrent(){
-    int sensorValue = 0;
+    int sensorValue = 1;
   for(int x = 0; x < 100; x++){
      sensorValue+= analogRead(analogInPin);
      delay(2);
   }
-  return sensorValue /100;
+  return sensorValue /30;
 }
 
 
