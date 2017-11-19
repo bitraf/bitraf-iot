@@ -60,14 +60,15 @@ for usage in reversed(getWeeklyUsage()):
 ind = np.arange(N)    # the x locations for the groups
 width = 0.35       # the width of the bars: can also be len(x) sequence
 
-p1 = plt.bar(ind, shopbotOn, width)
-p2 = plt.bar(ind, ShopbotSpinning, width,
-             bottom=shopbotOn)
+p1 = plt.bar(ind, ShopbotSpinning, width)
+p2 = plt.bar(ind, shopbotOn, width,
+             bottom=ShopbotSpinning)
+
 
 plt.ylabel('Hours')
 plt.title('ShopBot usage')
 plt.xticks(ind, Labels)
-plt.yticks(np.arange(0, 20, 5))
-plt.legend((p1[0], p2[0]), ('On', 'Spinning'))
+plt.yticks(np.arange(0, 20, 3))
+plt.legend((p1[0], p2[0]), ('Spinning', 'Setup'))
 
 plt.savefig('Weekly.png')
