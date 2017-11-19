@@ -40,3 +40,4 @@ plt.pie(sizes, explode=explode, labels=labels, colors=colors,
 plt.axis('equal')
 plt.title('Shopbot last 24 hours')
 plt.savefig('24Hours.png')
+plt.show();
