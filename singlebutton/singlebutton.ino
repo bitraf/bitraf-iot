@@ -1,4 +1,3 @@
-
 #include <WiFiClient.h>
 #include <WiFiClientSecure.h>
 #include <ESP8266WiFi.h>
@@ -9,10 +8,31 @@
 #include "./config.h"
 #include "./ledcontrol.hpp"
 
+// uncomment the device you're using
+//#define TYPE_NODEMCU 1
+#define TYPE_WEMOSD1 2
+
+// uncomment the location for the button
+//#define ROLE_LAB 1
+//#define ROLE_OFFICE3RDFLOOR 2
+#define ROLE_WORKSHOP 3
+
 struct Config {
-  const int ledPin = 14;
-  const int buttonPin = 12;
-  const String role = "bitraf/guestbutton/lab";
+  #if defined( TYPE_NODEMCU )
+    const int ledPin = 14;
+    const int buttonPin = 12;
+  #elif defined( TYPE_WEMOSD1 )
+    const int ledPin = D1;
+    const int buttonPin = D2;
+  #endif
+
+  #if defined( ROLE_LAB )
+    const String role = "bitraf/guestbutton/lab";
+  #elif defined( ROLE_OFFICE3RDFLOOR )
+    const String role = "bitraf/openbutton/office3rdfloor";
+  #elif defined( ROLE_WORKSHOP )
+    const String role = "bitraf/openbutton/workshop";
+  #endif
 
   const String wifiSsid = CFG_WIFI_SSID;
   const String wifiPassword = CFG_WIFI_PASSWORD;
@@ -42,6 +62,7 @@ void setup() {
 
   Serial.printf("Configuring wifi: %s\r\n", cfg.wifiSsid.c_str());
   WiFi.begin(cfg.wifiSsid.c_str(), cfg.wifiPassword.c_str());
+  WiFi.mode(WIFI_STA);
 
   mqttClient.setServer(cfg.mqttHost, cfg.mqttPort);
   mqttClient.setClient(wifiClient);
