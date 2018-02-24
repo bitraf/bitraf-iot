@@ -40,6 +40,12 @@ we would like to have a single button (by the door) to turn their power off.
 * Deploy a two-way bridge `MQTT<->433MHz` bridge
 * Create a controller with buttons for on/off
 
+## Environmental data
+
+* Particle size. Especially in laser-room, CNC room, woodworking room
+[SDS11](https://www.banggood.com/Nova-PM-Sensor-SDS011-High-Precision-Laser-PM2_5-Air-Quality-Detection-Sensor-Module-p-1144246.html)
+* Temperature+moisture, indoors and outdoors. DHT22
+
 ## Wanted MQTT services
 
 * Soil moisture from plants, light/tempature, watering status
@@ -50,5 +56,5 @@ we would like to have a single button (by the door) to turn their power off.
 * TV: Trigger common sounds
 * Room activity sensors using PIR
 * Machine activity sensors. Using current sensing?
-* Temperature+moisture, indoors and outdoors
-* Wind sensor outdoors
+* Wind sensor outdoors.
+
