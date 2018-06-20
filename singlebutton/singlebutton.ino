@@ -56,18 +56,19 @@ msgflo::InPort *ledPort;
 ledcontrol::Parameters ledParameters;
 ledcontrol::State ledState;
 
+const String clientId = cfg.role + WiFi.macAddress();
+
 void setup() {
   Serial.begin(115200);
-  delay(100);
+  delay(1000);
 
+  Serial.printf("MQTT clientId: %s\r\n", clientId.c_str());
   Serial.printf("Configuring wifi: %s\r\n", cfg.wifiSsid.c_str());
   WiFi.begin(cfg.wifiSsid.c_str(), cfg.wifiPassword.c_str());
   WiFi.mode(WIFI_STA);
 
   mqttClient.setServer(cfg.mqttHost, cfg.mqttPort);
   mqttClient.setClient(wifiClient);
-
-  const String clientId = cfg.role + WiFi.macAddress();
 
   engine = msgflo::pubsub::createPubSubClientEngine(participant, &mqttClient,
     clientId.c_str(), cfg.mqttUsername, cfg.mqttPassword);
