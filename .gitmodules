@@ -1,0 +1,3 @@
+[submodule "bitgate/esp-idf"]
+	path = bitgate/esp-idf
+	url = https://github.com/espressif/esp-idf.git
