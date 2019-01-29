@@ -2,7 +2,7 @@ TOOLCHAIN_Linux_x86_64 = https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.
 IDF_PATH = $(PWD)/esp-idf
 PATH := $(PWD)/toolchain/xtensa-esp32-elf/bin:$(PWD)/venv/bin:$(PATH)
 
-all: .toolchain.cookie .python.cookie
+all: .toolchain.cookie .python.cookie .esp-idf.cookie
 	cd bitgate; IDF_PATH=$(IDF_PATH) PATH=$(PATH) make
 
 %: .toolchain.cookie .python.cookie
@@ -30,6 +30,12 @@ toolchain/xtensa-esp32-elf: toolchain/toolchain.tar.gz
 venv:
 	virtualenv -p python venv
 
-.python.cookie: venv
+.python.cookie: venv $(IDF_PATH)/requirements.txt
 	venv/bin/pip install -r $(IDF_PATH)/requirements.txt
+	touch $@
+
+$(IDF_PATH)/requirements.txt:
+	git submodule update --init
+
+.esp-idf.cookie: $(IDF_PATH)/requirements.txt
 	touch $@
