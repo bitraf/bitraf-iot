@@ -1,0 +1,10 @@
+[Unit]
+Description="A daemon for writing labels via MQTT"
+
+[Service]
+ExecStart=/home/elias/print_label_service.py
+
+[Install]
+WantedBy=network.target
+
+
