@@ -3,7 +3,7 @@ The Print label service is a daemon that listens to
 messages on mqtt and prints a QR code and name, telephone and email on that label.
 
 ## Prepare installation
-
+```sudo apt install python3-setuptools```
 ```sudo pip3 install qrcode brother_ql paho-mqtt```
 
 ## Running
