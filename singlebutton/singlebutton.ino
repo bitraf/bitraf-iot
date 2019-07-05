@@ -19,8 +19,8 @@
 
 struct Config {
   #if defined( TYPE_NODEMCU )
-    const int ledPin = 14;
-    const int buttonPin = 12;
+    const int ledPin = 14;	// labeled "D5" on some boards
+    const int buttonPin = 12;	// labeled "D6" on some boards
   #elif defined( TYPE_WEMOSD1 )
     const int ledPin = D1;
     const int buttonPin = D2;
