@@ -1,0 +1,7 @@
+version: "3"
+services:
+  p2k16-label:
+    build: .
+    image: p2k16-label
+    stdin_open: true
+    tty: true
