@@ -1,5 +1,8 @@
 FROM python:3.9-slim-bullseye
-ADD . /code
-WORKDIR /code
-RUN pip install -r requirements.txt
+RUN useradd --create-home --shell /bin/bash app_user
+WORKDIR /home/app_user
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+USER app_user
+COPY . .
 CMD ["python", "print_label_service.py"]
