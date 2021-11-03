@@ -12,6 +12,8 @@ messages on mqtt and prints a QR code and name, telephone and email on that labe
 ## Testing
 mosquitto_pub -h mqtt.bitraf.no  -t "public/p2k16-dev/label/" -m '{"username": "test", "id": 1, "name": "Test Test", "phone": "01234567", "email": "test@example.com"}'
 
+## Docker image
+There is a workflow in this repository that builds a new docker image for this service on every release.
 
 ## License
 
