@@ -33,5 +33,5 @@ jobs:
           tags: |
             ghcr.io/bitraf/p2k16-label:${{steps.vars.outputs.tag}}
             ghcr.io/bitraf/p2k16-label:latest
-          # build on feature branches, push only on main branch
-          push: ${{ github.ref == 'refs/heads/main' }}
+          # build on feature branches, push only on master branch
+          push: ${{ github.ref == 'refs/heads/master' }}
