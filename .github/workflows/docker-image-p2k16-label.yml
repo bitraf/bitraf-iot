@@ -36,9 +36,10 @@ jobs:
           # build on feature branches, push only on master branch
           push: ${{ github.ref == 'refs/heads/master' }}
 
-      - name: Debug info
-        id: debug1
-        run: |
-          echo debug github.ref = ${GITHUB_REF}
-          echo debug2 github.ref = ${{ github.ref }}
+#      - name: Debug info
+#        id: debug1
+#        run: |
+#          echo debug github.ref = ${GITHUB_REF}
+#          echo debug2 github.ref = ${{ github.ref }}
 # so, GITHUB_REF is equal to the release tag, for example refs/tags/v0.3.0.2
+# and github.ref is also equal to the release tag, example refs/tags/v0.3.0.5
