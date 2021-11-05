@@ -38,4 +38,4 @@ jobs:
 
       - name: Debug info
         id: debug1
-        run: echo "debug: github.ref = ${GITHUB_REF} "
+        run: echo debug github.ref = ${GITHUB_REF}
