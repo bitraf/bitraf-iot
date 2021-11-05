@@ -13,7 +13,7 @@ messages on mqtt and prints a QR code and name, telephone and email on that labe
 mosquitto_pub -h mqtt.bitraf.no  -t "public/p2k16-dev/label/" -m '{"username": "test", "id": 1, "name": "Test Test", "phone": "01234567", "email": "test@example.com"}'
 
 ## Docker image
-There is a workflow in this repository that builds a new docker image for this service on every release.
+There is a workflow in this repository that builds a new docker image for this service on every release. The image is named 'p2k16-label' and tagged both with the relase version and 'latest'. It shows up under Packages on the organization page. To build a new image, simply create a new release in this repository.
 
 ## License
 
