@@ -33,8 +33,8 @@ jobs:
           tags: |
             ghcr.io/bitraf/p2k16-label:${{steps.vars.outputs.tag}}
             ghcr.io/bitraf/p2k16-label:latest
-          # build on feature branches, push only on master branch
-          push: ${{ github.ref == 'refs/heads/master' }}
+          # this will push on every release, which is what we want
+          push: true
 
 #      - name: Debug info
 #        id: debug1
