@@ -32,7 +32,7 @@ picture_width=370
 
 model="QL-1060N"
 backend="network"
-printer="tcp://10.13.37.201"
+printer="tcp://etikett2.lan.bitraf.no"
 image_path="/tmp/user.png"
 mqtt_topic="/public/p2k16-dev/label/#"
 
