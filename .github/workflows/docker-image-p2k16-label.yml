@@ -39,3 +39,5 @@ jobs:
       - name: Debug info
         id: debug1
         run: echo debug github.ref = ${GITHUB_REF}
+        run: echo debug2 github.ref = ${github.ref}
+# so, GITHUB_REF is equal to the release tag, for example refs/tags/v0.3.0.2
