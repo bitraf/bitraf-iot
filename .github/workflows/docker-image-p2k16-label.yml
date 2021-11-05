@@ -37,4 +37,5 @@ jobs:
           push: ${{ github.ref == 'refs/heads/master' }}
 
       - name: Debug info
+        id: vars
         run: echo "debug: github.ref = ${GITHUB_REF} "
