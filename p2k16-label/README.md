@@ -15,7 +15,7 @@ mosquitto_pub -h mqtt.bitraf.no  -t "public/p2k16-dev/label/" -m '{"username": "
 ## Docker image
 There is a workflow in this repository that builds a new docker image for this service on every release. The image is named 'p2k16-label' and tagged both with the relase version and 'latest'. It shows up under Packages on the organization page. To build a new image, simply create a new release in this repository.
 
-To create a release, create and push a git tag (it must be higher than existing tags). Done.
+To create a release, create and push a git tag (it must be higher than existing tags). Then create a release from the Release page of this repository, select the tag you created and pushed, fill in the necessary fields. Done.
 
 ## License
 
