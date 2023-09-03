@@ -1,6 +1,6 @@
 FROM python:3.9-slim-bullseye
 RUN apt update
-RUN apt install git
+RUN apt --yes install git
 RUN useradd --create-home --shell /bin/bash app_user
 WORKDIR /home/app_user
 COPY requirements.txt ./
