@@ -1,6 +1,7 @@
 pillow
 qrcode
-brother_ql
+#brother_ql
+git+https://github.com/pklaus/brother_ql@refs/pull/143/merge#egg=brother_ql
 paho.mqtt
 #json
 #tempfile
