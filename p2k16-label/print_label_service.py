@@ -62,12 +62,12 @@ def on_connect(client, userdata, flags, rc):
 	client.subscribe(mqtt_topic)
 
 def on_message(client, userdata, msg):
-    try:
-        user = json.loads(msg.payload.decode("utf-8"))
-        make_label(user["id"], user["username"], user["name"], user["phone"], user["email"])
-        print_label()
-    except e:
-        print(e)
+	try:
+		user = json.loads(msg.payload.decode("utf-8"))
+		make_label(user["id"], user["username"], user["name"], user["phone"], user["email"])
+		print_label()
+	except e:
+		print(e)
 
 client = mqtt.Client()
 client.on_connect = on_connect
