@@ -62,14 +62,20 @@ def on_connect(client, userdata, flags, rc):
 	client.subscribe(mqtt_topic)
 
 def on_message(client, userdata, msg):
-	user = json.loads(msg.payload.decode("utf-8"))
-	make_label(user["id"], user["username"], user["name"], user["phone"], user["email"])
-	print_label()
+	try:
+		user = json.loads(msg.payload.decode("utf-8"))
+		make_label(user["id"], user["username"], user["name"], user["phone"], user["email"])
+		print_label()
+	except:
+		print(f"Unable to parse message: {msg.payload}")
 
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
+client.will_set("/public/p2k16-dev/label-alive/alive", "False", 0, True)
 client.connect("mqtt.bitraf.no", 1883, 60)
+
+client.publish("/public/p2k16-dev/label-alive/alive", "True", 0, True)
 
 client.loop_forever()
