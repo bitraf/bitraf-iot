@@ -5,3 +5,4 @@ services:
     image: p2k16-label
     stdin_open: true
     tty: true
+    restart: always
